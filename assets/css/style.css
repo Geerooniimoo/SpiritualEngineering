@@ -1,17 +1,67 @@
-div {
-	border: solid;
+
+
+
+body {
+	background-repeat: no-repeat;
+    background-size: 100% 100%;
+    margin: 2%;
 }
-
-
+#title {
+    height: 203px;
+}
 #title1 {
+	text-align: center;
 	font-size: 100px;
-
+}
+#hands {
+    height: 153px;
 }
 #titleImg1 {
-	width: 100px;
-	height: 100px;
+    width: 150px;
+    height: 150px;
+    padding-left: 10%;
+    float: left;
+    padding-right: 5%;
+}
+#scoreBoard {
+    color: white;
+    background-color: black;
+    border: solid;
+    border-color: brown;
+    border-radius: 12px;
+    width: 38%;
+    float: left;
+    text-align: center;
+    height: 140px;
 }
 #titleImg2 {
-	width: 100px;
-	height: 100px;
+    width: 150px;
+    height: 150px;
+    padding-left: 4%;
+    overflow: hidden;
+}
+#timer {
+	text-align: center;
+    color: brown;
+    font-size: 50px;
+    width: 80px;
+    background-color: black;
+    border: solid;
+    border-color: firebrick;
+    border-width: 9px;
+    height: 64px;
+    border-radius: 25%;
+    position: relative;
+    left: 45%;
+}
+#Question {
+    text-align: center;
+    font-size: 30px;
+}
+#answers {
+    line-height: 1;
+    color: white;
+    position: relative;
+    left: 35%;
+    padding-bottom: 4%;
 }

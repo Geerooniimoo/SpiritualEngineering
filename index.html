@@ -3,35 +3,39 @@
 <head>
 	<title>Spiritual Trivia Game</title>
 
+	  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Rancho&effect=3d">
 	  <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 	  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
 
 	<div id='title'>
-		<h1 id="title1">Spiritual Trivia Game</h1>
+		<h1 id="title1" class="font-effect-3d">Spiritual Trivia</h1>
+	</div>
+	<div id="hands" >
 		<img id="titleImg1" src="assets/images/right hand.png">
+		<div id="scoreBoard">
+			<h2> Correct answers: <span id="rightAns" >0</span></h2>
+			<h2> Wrong answers:   <span id="wrongAns" >0</span></h2>
+		</div>
 		<img id="titleImg2" src="assets/images/left hand.png">
 	</div>
 
 	<div id="bodyRows">
-		<div id="timer">:30</div>
+		<div id="timer" class="font-effect-3d">:</div>
 
-		<div id="Question">Lorem ipsum dolor sit amet, consectetur adipisicing elit. </div>
+		<h1 id="Question" class="font-effect-3d">Lorem ipsum dolor sit amet, consectetur adipisicing elit. </h1>
 
-		<div id="answers" >
-			<div class="ans">a) Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div>
-
-			<div class="ans">b) Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-			</div>
-
-			<div class="ans">b) Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-			</div>
+		<div id="answers" class="font-effect-3d">
 			
-			<div class="ans">b) Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-			</div>
+			<li>
+				<ol class="ans" id="ans1"> a) </ol>
+				<ol class="ans" id="ans2"> b) </ol>
+				<ol class="ans" id="ans3"> c) </ol>
+				<ol class="ans" id="ans4"> d) </ol>
+			</li>
 		</div>
-
+	</div>
 
 <script src="assets/javascript/app.js"></script>
 </body>
