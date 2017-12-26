@@ -1,13 +1,13 @@
 
 let i = 0;
 let i2 = -1;
-let ans1;
-let ans2;
-let ans3;
-let ans4;
-let rightAns = 0;
-let wrongAns = 0;
-const time = 5;
+let i3 =0;
+let correctAns;
+let Ans = [];
+let rightAns;
+let rightAnsTotal = 0;
+let wrongAnsTotal = 0;
+const time = 60;
 let tim;
 let intervalId;
 
@@ -19,87 +19,142 @@ $('body').css('background-image' , 'url(' + background + ')');
 $('#scoreBoard').css("opacity", '0');
 
 const qAndA = [
-["What is the spirit?",
-"a ghost",
-"what we become once we die",
-"what God and the Devil are fighting for",
-"the nonphysical part of a person"
-],
-["If iternal life begins with an eternal sleep, when will the spirit wake up?", 
-"right away but it cannot be seen because is in a nonphysical form",
-"right away somewhere else",
-"after an eternity",
-"never"
-],
-["Can the flow of enery teach us about right and wrong?",
-"no, because enery cannot reason",
-"yes, because enery always follow the shortest path",
-"no, because enery is not alive",
-"yes, because it can inspire purpose by it's persuit of balance"
-],
-["What is the meaning evil?",
-"the absence of good",
-"all the Devil does",
-"ignorance",
-"depravity"
-],
-["What is the meaning of good",
-"light",
-"what is needed to go to heaven",
-"the absence of evil",
-"righteousness"
-]];
+	["What is the spirit?",
+	"a ghost",
+	"what we become once we die",
+	"what God and the Devil are fighting for",
+	"the nonphysical part of a person"],
+	["If iternal life begins with an eternal sleep, when will the spirit wake up?", 
+	"right away but it cannot be seen because is in a nonphysical form",
+	"right away somewhere else",
+	"after an eternity",
+	"never"],
+	["Can the flow of enery teach us about right and wrong?",
+	"no, because enery cannot reason",
+	"yes, because enery always follow the shortest path",
+	"no, because enery is not alive",
+	"yes, because it can inspire purpose by it's persuit of balance"],
+	["What is the meaning of evil?",
+	"the absence of good",
+	"all the Devil does",
+	"ignorance",
+	"depravity"],
+	["What is the meaning of good",
+	"light",
+	"what is needed to go to heaven",
+	"the absence of evil",
+	"righteousness"]
+	];
 
-
-
-timer();
-
-function nextQ() {
-	//display scoreboard at the end
-	if (i == qAndA.length) {
-		$('#rightAns').html(rightAns);
-		$('#wrongAns').html(wrongAns);
+displayQuestions();
+					
+function scoreboard() {
+	if (i >= qAndA.length) {
+		$('#rightAns').html(rightAnsTotal);
+		$('#wrongAns').html(wrongAnsTotal);
 		$('#scoreBoard').css('opacity', '1');
 		$('#bodyRows').css('opacity', '0');
 	}
-	//submit question
+	else {
+		displayQuestions();
+	}
+ };
+
+function displayQuestions() {
+
+	//display question
 	$('#Question').html(qAndA[i][0]);
-	//submit and contain answers
-	for (let x = 1; x < 5; x++) {
-		$('#ans' + x).html(qAndA[i][x]);
+
+	//correct answer
+	correctAns = qAndA[i][4]; 
+	
+	//randomize the answers in array
+	i2 = Math.floor(Math.random() * 4 + 1);
+	i3 = 0;
+		for (let y = i2; y < 5; y++) {
+			Ans[i3] = (qAndA[i][y]);
+			i3++
+		};
+		for (let y = 1; y < i2; y++) {
+			Ans[i3] = (qAndA[i][y]);
+			i3++
+		};
+	//display randomized answers
+	for (let y = 1; y < 5; y++) {
+	 		$('#ans' + y).html(Ans[y - 1])
 	};
-	i++;
 	timer();
+};
+
+function nextQuestion() {
+	i++;
+	scoreboard();
 }
 
 function timer() {
 		tim = time + 1;
 		clearInterval(intervalId);			
       	intervalId = setInterval(decrement, 1000);
-    }
-
+};
 function decrement() {
 	    tim--;
     	$("#timer").html(tim);
 		if (tim === 0) {
+			wrongAnsTotal++;
 			clearInterval(intervalId);
-			nextQ();
-		}
-}
+			nextQuestion();
+		};
+};
+
 //check answer
-$('#ans1').on('click', check);
-$('#ans2').on('click', check);
-$('#ans3').on('click', check);
-$('#ans4').on('click', check);
+$('#ans1').on('click', check1);
+$('#ans2').on('click', check2);
+$('#ans3').on('click', check3);
+$('#ans4').on('click', check4);
 
 
-function check() {
-	if (this == qAndA[i][4]) {
-		rightAns++
-		nextQ();
+function check1() {
+	clearInterval(intervalId);
+	if (Ans[0] == correctAns) {
+		rightAnsTotal++
+		nextQuestion();
 	}
 	else {
-		wrongAns++;
-		nextQ();
+		wrongAnsTotal++;
+		nextQuestion();
+	};
+}; 
+function check2() {
+	clearInterval(intervalId);
+	if (Ans[1] == correctAns) {
+		rightAnsTotal++
+		nextQuestion();
 	}
-} 
+	else {
+		wrongAnsTotal++;
+		nextQuestion();
+	};
+}; 
+function check3() {
+	clearInterval(intervalId);
+	if (Ans[2] == correctAns) {
+		rightAnsTotal++
+		nextQuestion();
+	}
+	else {
+		wrongAnsTotal++;
+		nextQuestion();
+	};
+}; 
+function check4() {
+	clearInterval(intervalId);
+	if (Ans[3] == correctAns) {
+		rightAnsTotal++
+		nextQuestion();
+	}
+	else {
+		wrongAnsTotal++;
+		nextQuestion();
+	};
+}; 
+
