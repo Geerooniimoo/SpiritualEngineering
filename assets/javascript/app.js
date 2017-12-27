@@ -1,15 +1,28 @@
 
+let tim;
 let i = 0;
 let i2 = -1;
 let i3 =0;
-let correctAns;
 let Ans = [];
 let rightAns;
+let intervalId;
+let correctAns;
+const time = 10;
 let rightAnsTotal = 0;
 let wrongAnsTotal = 0;
-const time = 60;
-let tim;
-let intervalId;
+
+const themeSong = document.createElement('audio');
+$(themeSong).attr('src' , "assets/sounds/Halo Reach - 18 - Walking Away.mp3");
+const rightAnsSong = document.createElement('audio');
+$(rightAnsSong).attr('src', 'assets/sounds/filling-your-inbox.mp3');
+const wrongAnsSong = document.createElement('audio');
+$(wrongAnsSong).attr('src' , 'assets/sounds/nasty-error-long.mp3');
+const winSong = document.createElement('audio');
+$(winSong).attr('src', 'assets/sounds/12-days-of-christmas.mp3');
+const lostSong = document.createElement('audio');
+$(lostSong).attr('src', 'assets/sounds/Corpse Party - Gameover.mp3')
+
+
 
 //random background
 let ground = ['assets/images/background1.png', 'assets/images/background2.png', 'assets/images/background3.png', 'assets/images/background4.png', 'assets/images/background5.png', 'assets/images/background6.png', 'assets/images/background7.png'];
@@ -47,6 +60,7 @@ const qAndA = [
 	];
 
 displayQuestions();
+themeSong.play();
 					
 function scoreboard() {
 	if (i >= qAndA.length) {
@@ -54,6 +68,14 @@ function scoreboard() {
 		$('#wrongAns').html(wrongAnsTotal);
 		$('#scoreBoard').css('opacity', '1');
 		$('#bodyRows').css('opacity', '0');
+			if (rightAnsTotal > wrongAnsTotal) {
+				themeSong.pause();
+				winSong.play();
+			}
+			else {
+				themeSong.pause();
+				lostSong.play();
+			};
 	}
 	else {
 		displayQuestions();
@@ -101,6 +123,7 @@ function decrement() {
     	$("#timer").html(tim);
 		if (tim === 0) {
 			wrongAnsTotal++;
+			wrongAnsSong.play();		
 			clearInterval(intervalId);
 			nextQuestion();
 		};
@@ -117,10 +140,12 @@ function check1() {
 	clearInterval(intervalId);
 	if (Ans[0] == correctAns) {
 		rightAnsTotal++
+		rightAnsSong.play();
 		nextQuestion();
 	}
 	else {
 		wrongAnsTotal++;
+		wrongAnsSong.play();
 		nextQuestion();
 	};
 }; 
@@ -128,10 +153,12 @@ function check2() {
 	clearInterval(intervalId);
 	if (Ans[1] == correctAns) {
 		rightAnsTotal++
+		rightAnsSong.play();
 		nextQuestion();
 	}
 	else {
 		wrongAnsTotal++;
+		wrongAnsSong.play();
 		nextQuestion();
 	};
 }; 
@@ -139,10 +166,12 @@ function check3() {
 	clearInterval(intervalId);
 	if (Ans[2] == correctAns) {
 		rightAnsTotal++
+		rightAnsSong.play();
 		nextQuestion();
 	}
 	else {
 		wrongAnsTotal++;
+		wrongAnsSong.play();
 		nextQuestion();
 	};
 }; 
@@ -150,10 +179,12 @@ function check4() {
 	clearInterval(intervalId);
 	if (Ans[3] == correctAns) {
 		rightAnsTotal++
+		rightAnsSong.play();
 		nextQuestion();
 	}
 	else {
 		wrongAnsTotal++;
+		wrongAnsSong.play();
 		nextQuestion();
 	};
 }; 
