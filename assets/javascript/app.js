@@ -37,8 +37,8 @@ $(lostDoor).attr('src', 'assets/sounds/creaky-wood-door.mp3')
 
 
 //random background
-let ground = ['assets/images/background1.png', 'assets/images/background2.png', 'assets/images/background3.png', 'assets/images/background4.png', 'assets/images/background5.png', 'assets/images/background6.png', 'assets/images/background7.png'];
-let background = ground[Math.floor(Math.random() * 7)];
+let ground = ['assets/images/background0.png', 'assets/images/background1.png', 'assets/images/background2.png', 'assets/images/background3.png', 'assets/images/background4.png', 'assets/images/background5.png', 'assets/images/background6.png', 'assets/images/background7.png'];
+let background = ground[Math.floor(Math.random() * 8)];
 $('body').css('background-image' , 'url(' + background + ')');
 
 handRight = ['assets/images/rightHand0.png', 'assets/images/rightHand1.png', 'assets/images/rightHand2.png', 'assets/images/rightHand3.png'];
