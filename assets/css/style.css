@@ -4,24 +4,28 @@
 body {
 	background-repeat: no-repeat;
     background-size: 100% 100%;
-    margin: 2%;
+    margin: 5%;
 }
 #title {
     height: 203px;
 }
 #title1 {
-	text-align: center;
-	font-size: 100px;
+    text-align: center;
+	font-size: 90px;
+    color: darkred;
+    line-height: .9
+
 }
 #hands {
     height: 153px;
 }
-#titleImg1 {
+#leftHand {
+    position: fixed;
+    right: 10%;
+    top: 30%;
     width: 150px;
     height: 150px;
-    padding-left: 10%;
     float: left;
-    padding-right: 5%;
 }
 #scoreBoard {
     color: white;
@@ -30,14 +34,18 @@ body {
     border-color: brown;
     border-radius: 12px;
     width: 38%;
-    float: left;
     text-align: center;
     height: 140px;
+    position: fixed;
+    left: 30%;
+    top: 30%;
 }
-#titleImg2 {
+#rightHand {
+    position: fixed;
+    left: 10%;
+    top: 30%;
     width: 150px;
     height: 150px;
-    padding-left: 4%;
     overflow: hidden;
 }
 #timer {
@@ -57,11 +65,31 @@ body {
 #Question {
     text-align: center;
     font-size: 30px;
+    color: brown;
+    font-weight: 900;
+    background-color: black;
+    border-radius: 12px;
+    border-color: brown;
+    border: solid;
+    border-width: .5px;
 }
 #answers {
     line-height: 1;
-    color: white;
+    color: brown;
     position: relative;
-    left: 35%;
+    left: 20%;
     padding-bottom: 4%;
+    font-style: oblique;
+    font-weight: bold;
+    font-size: 20px;
+    background-color: black;
+    border-radius: 12px;
+    border: solid;
+    border-width: 1px;
+    width: 60%;
+    height: 192px;
+}
+.ans:hover {
+    color: sandybrown;
+    cursor: -webkit-grab;
 }
