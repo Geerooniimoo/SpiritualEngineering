@@ -2,9 +2,8 @@
 
 
 body {
-	background-repeat: no-repeat;
-    background-size: 100% 100%;
-    margin: 5%;
+    background-repeat: no-repeat;
+    background-size: 100% 470%;
 }
 #title {
     height: 203px;
@@ -22,7 +21,7 @@ body {
 #leftHand {
     position: fixed;
     right: 10%;
-    top: 30%;
+    top: 25%;
     width: 150px;
     height: 150px;
     float: left;
@@ -33,6 +32,7 @@ body {
     border: solid;
     border-color: brown;
     border-radius: 12px;
+    font-size: 20px;
     width: 38%;
     text-align: center;
     height: 140px;
@@ -43,13 +43,13 @@ body {
 #rightHand {
     position: fixed;
     left: 10%;
-    top: 30%;
+    top: 25%;
     width: 150px;
     height: 150px;
     overflow: hidden;
 }
 #timer {
-	text-align: center;
+    text-align: center;
     color: brown;
     font-size: 50px;
     width: 80px;
@@ -59,9 +59,11 @@ body {
     border-width: 9px;
     height: 64px;
     border-radius: 25%;
-    position: relative;
+    position: fixed;
     left: 45%;
+    bottom: 40%;
 }
+
 #Question {
     text-align: center;
     font-size: 30px;
@@ -72,13 +74,17 @@ body {
     border-color: brown;
     border: solid;
     border-width: .5px;
+    position: fixed;
+    left: 3%;
+    bottom: 33%;
+    width: 95%;
 }
 #answers {
     line-height: 1;
     color: brown;
-    position: relative;
+    position: fixed;
     left: 20%;
-    padding-bottom: 4%;
+    bottom: 1%;
     font-style: oblique;
     font-weight: bold;
     font-size: 20px;

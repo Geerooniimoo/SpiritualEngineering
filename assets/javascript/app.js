@@ -148,6 +148,7 @@ function displayQuestions() {
 	};
 	
 	timer();
+	move();
 };
 
 function nextQuestion() {
