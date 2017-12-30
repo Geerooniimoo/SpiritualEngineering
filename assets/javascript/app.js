@@ -63,7 +63,7 @@ displayQuestions();
 					
 function scoreboard() {
 	if (i >= qAndA.length) {
-		$('#bodyRows').animate({opacity: '0'});
+		$('#bodyRows').hide();
 		score();
 	}
 	
