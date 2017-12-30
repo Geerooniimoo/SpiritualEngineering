@@ -11,7 +11,7 @@ let handLeft;
 let handRight;
 let intervalId;
 let correctAns;
-const time = 10;
+const time = 15;
 let rightAnsTotal = 0;
 let wrongAnsTotal = 0;
 
@@ -27,7 +27,6 @@ const winTrump = document.createElement('audio');
 $(winTrump).attr('src', 'assets/sounds/bugle-3.mp3');
 const winBells = document.createElement('audio');
 $(winBells).attr('src', 'assets/sounds/tower-clock.mp3');
-
 const lostSong = document.createElement('audio');
 $(lostSong).attr('src', 'assets/sounds/Corpse Party - Gameover.mp3')
 const lostLaugh = document.createElement('audio');
@@ -57,8 +56,10 @@ const qAndA = [
 	["According to popular views, what is the meaning of life?", "to discover the creator", "to focus on spiritual growth and serive to humanity", "to seek devine salvation through the grace of God", "to resolve the imbalance of the mind by understanding the nature of reality"]
 	];
 
-displayQuestions();
+	let randomQ = Math.floor(Math.random() * qAndA.length);
+
 themeSong.play();
+displayQuestions();
 					
 function scoreboard() {
 	if (i >= qAndA.length) {
@@ -70,7 +71,6 @@ function scoreboard() {
 		displayQuestions();
 	};
 };	
-
 function score() {
 	$('#scoreBoard').animate({opacity: '1'});
 	$('#rightAns').html(rightAnsTotal);
@@ -105,8 +105,6 @@ function score() {
 			move2();
 		};
 };	
-
-
 function move2() {
 	$('#rightHand').attr('src', handRight[1]);
 	$('#rightHand').animate({height: '500px', width: '500px', top: '0%', left: '0%'}, 3000);
@@ -125,21 +123,25 @@ function move2() {
 
 function displayQuestions() {
 
-	//display question
-	$('#Question').html(qAndA[i][0]);
+	//display randomized question
+	randomQ++;
+	if(randomQ >= qAndA.length) {
+		randomQ = 0;
+	}
+	$('#Question').html(qAndA[randomQ][0]);
 
 	//correct answer
-	correctAns = qAndA[i][4]; 
+	correctAns = qAndA[randomQ][4]; 	
 	
 	//randomize the answers in array
 	i2 = Math.floor(Math.random() * 4 + 1);
 	i3 = 0;
 		for (let y = i2; y < 5; y++) {
-			Ans[i3] = (qAndA[i][y]);
+			Ans[i3] = (qAndA[randomQ][y]);
 			i3++
 		};
 		for (let y = 1; y < i2; y++) {
-			Ans[i3] = (qAndA[i][y]);
+			Ans[i3] = (qAndA[randomQ][y]);
 			i3++
 		};
 	//display randomized answers
@@ -156,7 +158,6 @@ function nextQuestion() {
 	move();
 	scoreboard();
 }
-
 function timer() {
 		tim = time + 1;
 		clearInterval(intervalId);			
@@ -172,20 +173,16 @@ function decrement() {
 			nextQuestion();
 		};
 };
-
 //hands random position
 function randomPosition() {
 	randomY = Math.floor(Math.random() * 8 + 26);
 	randomX = Math.floor(Math.random() * 4 + 8);
 }
-
 function move() {
 	    randomPosition();
 		$('#rightHand').animate({top: randomY + '%', left: randomX + '%'}, 3000);
 		$('#leftHand').animate({top: randomY + '%'}, 3000);
 };
-//timer2();
-
 //check answer
 $('#ans1').on('click', check1);
 $('#ans2').on('click', check2);

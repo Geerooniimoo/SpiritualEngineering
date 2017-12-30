@@ -80,22 +80,25 @@ body {
     width: 95%;
 }
 #answers {
-    line-height: 1;
-    color: brown;
     position: fixed;
-    left: 20%;
+    left: 15%;
     bottom: 1%;
-    font-style: oblique;
-    font-weight: bold;
-    font-size: 20px;
     background-color: black;
     border-radius: 12px;
     border: solid;
     border-width: 1px;
-    width: 60%;
+    width: 70%;
     height: 192px;
 }
 .ans:hover {
     color: sandybrown;
     cursor: -webkit-grab;
 }
+.ans {
+    line-height: 1;
+    color: brown;
+    font-style: oblique;
+    font-weight: bold;
+    font-size: 20px;
+}
+
