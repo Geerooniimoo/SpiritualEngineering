@@ -184,61 +184,19 @@ function move() {
 		$('#leftHand').animate({top: randomY + '%'}, 3000);
 };
 //check answer
-$('#ans1').on('click', check1);
-$('#ans2').on('click', check2);
-$('#ans3').on('click', check3);
-$('#ans4').on('click', check4);
+$('.ans').on('click', check);
 
-function check1() {
-	clearInterval(intervalId);
-	if (Ans[0] == correctAns) {
+function check(questionIndex){
+	console.log(Ans);
+	console.log(event.target.innerHTML)
+	const userAns = event.target.innerHTML;
+	if(userAns === correctAns) {
 		rightAnsTotal++
 		rightAnsSong.play();
 		nextQuestion();
-	}
-	else {
+	} else {
 		wrongAnsTotal++;
 		wrongAnsSong.play();
-		nextQuestion();
-	};
-}; 
-function check2() {
-	clearInterval(intervalId);
-	if (Ans[1] == correctAns) {
-		rightAnsTotal++
-		rightAnsSong.play();
-		nextQuestion();
+		nextQuestion();	
 	}
-	else {
-		wrongAnsTotal++;
-		wrongAnsSong.play();
-		nextQuestion();
-	};
-}; 
-function check3() {
-	clearInterval(intervalId);
-	if (Ans[2] == correctAns) {
-		rightAnsTotal++
-		rightAnsSong.play();
-		nextQuestion();
-	}
-	else {
-		wrongAnsTotal++;
-		wrongAnsSong.play();
-		nextQuestion();
-	};
-}; 
-function check4() {
-	clearInterval(intervalId);
-	if (Ans[3] == correctAns) {
-		rightAnsTotal++
-		rightAnsSong.play();
-		nextQuestion();
-	}
-	else {
-		wrongAnsTotal++;
-		wrongAnsSong.play();
-		nextQuestion();
-	};
-}; 
-
+}
