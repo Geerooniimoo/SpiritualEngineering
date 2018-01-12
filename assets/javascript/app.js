@@ -63,6 +63,7 @@ displayQuestions();
 					
 function scoreboard() {
 	if (i >= qAndA.length) {
+		clearInterval(intervalId);
 		$('#bodyRows').hide();
 		score();
 	}
