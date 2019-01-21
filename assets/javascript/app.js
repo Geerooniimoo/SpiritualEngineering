@@ -78,7 +78,7 @@ function score() {
 	$('#wrongAns').html(wrongAnsTotal);
 	
 		if (rightAnsTotal > wrongAnsTotal) {
-			themeSong.pause();
+			themeSong.play();
 			winSong.play();
 			winTrump.play();
 			winBells.play();
@@ -98,7 +98,7 @@ function score() {
 			}
 		}
 		else {
-			themeSong.pause();
+			themeSong.play();
 			lostSong.play();
 			lostDoor.play();
 			lostLaugh.play();
@@ -186,7 +186,6 @@ function move() {
 };
 //check answer
 $('.ans').on('click', check);
-
 function check(questionIndex){
 	console.log(Ans);
 	console.log(event.target.innerHTML)

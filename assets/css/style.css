@@ -4,6 +4,7 @@
 body {
     background-repeat: no-repeat;
     background-size: 100% 470%;
+    background-image: url(/assets/images/background5.png)
 }
 #title {
     height: 203px;
