@@ -1,0 +1,5 @@
+Player1Img:
+scrollHeight:811
+scrollWeight:889
+offSetTop:41
+offSetLeft:103

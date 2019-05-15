@@ -1,6 +1,4 @@
 
-
-
 body {
     background-repeat: no-repeat;
     background-size: 100% 470%;
@@ -13,8 +11,8 @@ body {
     text-align: center;
 	font-size: 90px;
     color: darkred;
-    line-height: .9
-
+    line-height: .9;
+    font-family: Merriweather;
 }
 #hands {
     height: 153px;
@@ -64,7 +62,6 @@ body {
     left: 45%;
     bottom: 40%;
 }
-
 #Question {
     text-align: center;
     font-size: 30px;
@@ -101,5 +98,31 @@ body {
     font-style: oblique;
     font-weight: bold;
     font-size: 20px;
+}
+
+#bodyRows{
+    display: none;
+}
+
+#startDiv {
+    background: white;
+    border: 8px solid darkslategray;
+    border-radius: 25px;
+    text-align: center;
+    width: 27rem;
+    margin: 0 auto;
+    font-size: 1.5rem;
+    font-family: Merriweather;
+    background: black;
+    font-weight: bold;
+    padding-bottom: 20px;
+}
+
+#startDiv button {
+    background: cadetblue;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: bolder;
 }
 
