@@ -26,6 +26,7 @@ body {
     float: left;
 }
 #scoreBoard {
+    display: none;
     color: white;
     background-color: black;
     border: solid;
@@ -105,21 +106,22 @@ body {
 }
 
 #startDiv {
-    background: white;
-    border: 8px solid darkslategray;
+    border: 1px solid darkgrey;
     border-radius: 25px;
     text-align: center;
     width: 27rem;
     margin: 0 auto;
     font-size: 1.5rem;
-    font-family: Merriweather;
+    font-family: Merriweather sans-serif;
     background: black;
     font-weight: bold;
     padding-bottom: 20px;
+    color: white;
+    box-shadow: 3px 5px 10px black;
 }
 
 #startDiv button {
-    background: cadetblue;
+    background: black;
     color: white;
     padding: 10px;
     border-radius: 5px;
