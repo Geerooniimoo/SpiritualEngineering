@@ -148,3 +148,39 @@ body {
     }
 }
 
+.spiritGrab {
+    animation: spiritGrab 2s cubic-bezier(0,1,1,0);
+}
+
+@keyframes spiritGrab {
+    0% {
+        background-image: url("../images/leftHand0.png");
+        transform: scale(1.0);
+        
+    }
+    25% {
+        transform: scale(1.40);
+    }
+    /* 25.5% {
+        transform: scale(1.40);
+    } */
+    50% {
+        transform: scale(1.80);
+    }
+    /* 50.5% {
+        transform: scale(1.60);
+    } */
+    75% {
+        transform: scale(2.60);
+    }
+    /* 75.5% {
+        transform: scale(1.80);
+    } */
+    99.5% {
+        transform: scale(5.20);
+    }
+    /* 100% {
+        transform: scale(2);
+    } */
+}
+

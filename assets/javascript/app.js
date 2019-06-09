@@ -70,7 +70,7 @@ qAndA = qAndA.sort(() => 0.5 - Math.random());
 // Random background
 $('body').css("background-image", `url('${ground[Math.floor(Math.random() * ground.length)]}')`);
 // move hands
-const moveHands = setInterval(move, 4000);
+const moveHands = setInterval(move, 3000);
 // Start Triva Game
 $('#startButton').on("click", startGame);
 //check answer
@@ -79,6 +79,7 @@ $('.ans').on('click', check);
 
 // Functions definition
 // ============================================================================================
+
 function startGame() {
 	themeSong.play();
 	$("#startDiv").hide();
@@ -100,6 +101,7 @@ function displayQuestions() {
 };
 
 function nextQuestion() {
+	questionIndex++;
 	if (questionIndex >= qAndA.length) {
 		clearInterval(intervalId);
 		$('#bodyRows').hide();
@@ -115,6 +117,7 @@ function score() {
 	$('#scoreBoard').show(1000);
 	$('#rightAns').html(rightAnsTotal);
 	$('#wrongAns').html(wrongAnsTotal);
+	clearInterval(moveHands);
 
 	if (rightAnsTotal > wrongAnsTotal) {
 		winSong.play();
@@ -127,7 +130,6 @@ function score() {
 		$('#leftHand').animate({ height: '+=10%', width: '+=10%', right: '-=5%' }, 3000);
 	}
 	else {
-		themeSong.play();
 		lostSong.play();
 		lostDoor.play();
 		lostLaugh.play();
@@ -170,8 +172,8 @@ function decrement() {
 
 //hands random position
 function move() {
-	$('#rightHand').animate({ top: `${Math.random()*8+26}%`, left: `${Math.random()*4+8}%` }, 3000);
-	$('#leftHand').animate({ top: `${Math.random()*8+26}%`, right: `${Math.random()*4+8}%` }, 3000);
+	$('#rightHand').animate({ top: `${Math.random() * 8 + 26}%`, left: `${Math.random() * 4 + 8}%` }, 3000);
+	$('#leftHand').animate({ top: `${Math.random() * 8 + 26}%`, right: `${Math.random() * 4 + 8}%` }, 3000);
 };
 
 function check() {
@@ -186,6 +188,5 @@ function check() {
 		wrongAnsTotal++;
 		wrongAnsSong.play();
 	};
-	questionIndex++;
 	nextQuestion();
 }
