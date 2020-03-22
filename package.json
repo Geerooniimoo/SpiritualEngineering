@@ -1,0 +1,25 @@
+{
+  "name": "Spiritual_Engineering",
+  "version": "1.0.0",
+  "description": "With the use of HTML, CSS and JavaScript, I give you a spiritual trivia game.  Enjoy, no physical harm will come to you. All answers can be found in Google.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Geerooniimoo/TriviaGame.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Geerooniimoo/TriviaGame/issues"
+  },
+  "homepage": "https://github.com/Geerooniimoo/TriviaGame#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.9.5"
+  }
+}
