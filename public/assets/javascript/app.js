@@ -29,6 +29,7 @@ let correctAns;
 let time = 16;
 let rightAnsTotal = 0;
 let wrongAnsTotal = 0;
+
 // Questions and Answers
 // ==============================================================================================
 let qAndA = [
@@ -62,6 +63,18 @@ let qAndA = [
 	}
 ];
 // ============================================================================================
+// Register IP
+$.ajax({
+	url: "https://api.ipify.org?format=json",
+	method: 'GET'
+}).then(res => {
+	console.log(res);
+	$.ajax({
+		url: "/api/user",
+		method: 'POST',
+		data: res
+	})
+});
 
 // Start App
 // ============================================================================================
