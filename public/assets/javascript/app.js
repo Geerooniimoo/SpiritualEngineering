@@ -64,16 +64,21 @@ let qAndA = [
 ];
 // ============================================================================================
 // Register IP
+// $.ajax({
+// 	url: "https://api.ipify.org?format=json",
+// 	method: 'GET'
+// }).then(res => {
+// 	console.log(res);
+// $.ajax({
+// 	url: "/api/user",
+// 	method: 'POST',
+// 	data: res
+// })
+// });
 $.ajax({
-	url: "https://api.ipify.org?format=json",
-	method: 'GET'
-}).then(res => {
-	console.log(res);
-	$.ajax({
-		url: "/api/user",
-		method: 'POST',
-		data: res
-	})
+	url: "/api/user",
+	method: 'POST',
+	data: { 'IP': '174.132.64.13' }
 });
 
 // Start App

@@ -1,20 +1,20 @@
 // Get public IP:
-// $.getJSON("https://api.ipify.org?format=json", 
+// $.getJSON("https:/.ipify.org?format=json", 
 // function(data) { 
 
 const router = require('express').Router();
 const usersController = require('../controllers/usersController');
 
 // match /api/users/:id
-// router
-// .route('/api/user/:id')
-// .get(usersController.findById)
-// .delete(usersController.deleteBook);
+router
+    .route('/user/:id')
+    .get(usersController.findById)
+    .delete(usersController.deleteUser);
 
 // match /api/users
 router
-    .route('/api/user')
+    .route('/user')
     .get(usersController.findAll)
-    .post(usersController.saveBook);
+    .post(usersController.saveUser);
 
 module.exports = router;
