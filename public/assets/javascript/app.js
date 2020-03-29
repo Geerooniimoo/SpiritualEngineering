@@ -78,7 +78,7 @@ let qAndA = [
 $.ajax({
 	url: "/api/user",
 	method: 'POST',
-	data: { 'IP': '174.132.64.13' }
+	data: { 'ip': '174.132.64.13' }
 });
 
 // Start App
