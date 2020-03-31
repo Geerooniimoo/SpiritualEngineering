@@ -75,11 +75,31 @@ let qAndA = [
 // 	data: res
 // })
 // });
+// $.ajax({
+// 	url: "/api/user",
+// 	method: 'POST',
+// 	data: { 'ip': '174.132.64.13' }
+// });
 $.ajax({
 	url: "/api/user",
-	method: 'POST',
-	data: { 'ip': '174.132.64.13' }
-});
+	method: 'GET',
+}).then(res => console.log(res))
+
+// =============================LOCAL=STORAGE=================================================
+
+var d = new Date();
+var lastVist = localStorage.getItem('lastVist')
+
+if (lastVist) {
+	if(parseInt(lastVist) < 24) {
+		$('button').html(`<h1> ${24 - parseInt(lastVist)}:00 </h1>`);
+	}
+// } else {
+// 	localStorage.setItem('lastVist',d.getHours());
+
+}
+
+
 
 // Start App
 // ============================================================================================

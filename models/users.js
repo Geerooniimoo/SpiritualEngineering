@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const usersSchema = new Schema({
-    ip: String,
+    ip: { type: String, unique: true },
     answers: String,
     visits: Number,
     visited: { type: Date, default: Date.now }
