@@ -85,19 +85,19 @@ $.ajax({
 	method: 'GET',
 }).then(res => console.log(res))
 
-// =============================LOCAL=STORAGE=================================================
+// =============================LOCALSTORAGE==================================================
 
-var d = new Date();
-var lastVist = localStorage.getItem('lastVist')
+var lastVisit = localStorage.getItem('lastVisit')
 
-if (lastVist) {
-	if(parseInt(lastVist) < 24) {
-		$('button').html(`<h1> ${24 - parseInt(lastVist)}:00 </h1>`);
+if (lastVisit) {
+	var mins = (Date.now() - parseInt(lastVisit)) / 60
+	
+	if(mins < 1440) {
+		$('#startDiv').html(`<p>Time remaining <br> to play again.<p> <div><h1>${mins}</h1></div>`)
 	}
-// } else {
-// 	localStorage.setItem('lastVist',d.getHours());
-
-}
+} else {
+	localStorage.setItem('lastVist',Date.now());
+};
 
 
 
