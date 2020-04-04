@@ -63,46 +63,10 @@ let qAndA = [
 	}
 ];
 
-// =========================LOCAL=AND=REMOTE=STORAGE=HANDLING=====================================
-if (localStorage.getItem('userIp')) {
-	let lastVisit = Date.now() - parseInt(localStorage.getItem('lastVisit'));
-	if (lastVisit) {
-		if (lastVisit>86400) {
-			localStorage.setItem('lastVisit',Date.now())	
-		} else {
-			// wait time remaining
-			$('#startDiv').html(`<p>Time remaining <br> to play again.<p> <div><h1>${mins}</h1></div>`)
-		}
-	} else {
-		// wait 24 hours
-		$('#startDiv').html(`<p>Time remaining <br> to play again.<p> <div><h1>${mins}</h1></div>`)
-
-		// create last visit
-		localStorage.setItem('lastVisti',Date.now());
-	}	
-} else {
-
-	$.ajax({
-		url: "https://api.ipify.org?format=json",
-		method: 'GET'
-	}).then(res => {
-		console.log(res);
-		localStorage.setItem('userIp', res.ip);
-		localStorage.setItem('lastVisit', Date.now());
-		$.ajax({
-			url: "/api/user",
-			method: 'POST',
-			data: res
-		});
-	});
-};
-// $.ajax({
-// 	url: "/api/user",
-// 	method: 'GET',
-// }).then(res => console.log(res))
-
 // Start App
 // ============================================================================================
+// Handle visit
+handleVisit();
 // Random question
 qAndA = qAndA.sort(() => 0.5 - Math.random());
 // Random background
@@ -113,10 +77,69 @@ const moveHands = setInterval(move, 3000);
 $('#startButton').on("click", startGame);
 //check answer
 $('.ans').on('click', check);
-// ============================================================================================
 
-// Functions definition
-// ============================================================================================
+// =========================LOCAL=AND=REMOTE=STORAGE=HANDLING=====================================
+
+
+function count(mins) {
+	var mins = mins--;
+	var h = mins > 60 ? `${Math.floor(mins / 60)}` : '00';
+	var m = mins % 60 > 10 ? `${mins % 60}` : `0${mins % 60}`;
+	console.log('Time: ',`${h}:${m}`);
+
+	return `${h}:${m}`;
+}
+
+function clock(mins) {
+	return setInterval(count(mins), 60000);
+};
+
+
+
+function handleVisit() {
+	var userIP = localStorage.getItem('userIP');
+	var lastVisit = parseInt(localStorage.getItem('lastVisit'));
+
+	if (lastVisit) {
+		var minsLastVisit = (Date.now() - lastVisit) / 60000;
+
+		if (minsLastVisit) {
+			if (minsLastVisit > 1440) {
+				localStorage.setItem('lastVisit', Date.now())
+			} else {
+				// wait time remaining
+				$('#startDiv').html(`<p>Time remaining <br> to play again.<p> <div><h1>${clock(Math.floor(1440 - minsLastVisit))}</h1></div>`)
+			}
+		} else {
+			// wait 24 hours
+			$('#startDiv').html(`<p>Time remaining <br> to play again.<p> <div><h1>${minsLastVisit}</h1></div>`)
+
+			// create last visit
+			localStorage.setItem('lastVisti', Date.now());
+		};
+		// } else {
+
+		// 	$.ajax({
+		// 		url: "https://api.ipify.org?format=json",
+		// 		method: 'GET'
+		// 	}).then(res => {
+		// 		console.log(res);
+		// 		localStorage.setItem('userIP', res.ip);
+		// 		localStorage.setItem('lastVisit', Date.now());
+		// 		$.ajax({
+		// 			url: "/api/user",
+		// 			method: 'POST',
+		// 			data: res
+		// 		});
+		// 	});
+		// };
+	};
+};
+
+// $.ajax({
+// 	url: "/api/user",
+// 	method: 'GET',
+// }).then(res => console.log(res))
 
 function startGame() {
 	themeSong.play();
