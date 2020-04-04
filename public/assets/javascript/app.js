@@ -62,44 +62,44 @@ let qAndA = [
 		answers: ["to discover the creator", "to focus on spiritual growth and serive to humanity", "to seek devine salvation through the grace of God", "to resolve the imbalance of the mind by understanding the nature of reality"]
 	}
 ];
-// ============================================================================================
-// Register IP
-// $.ajax({
-// 	url: "https://api.ipify.org?format=json",
-// 	method: 'GET'
-// }).then(res => {
-// 	console.log(res);
-// $.ajax({
-// 	url: "/api/user",
-// 	method: 'POST',
-// 	data: res
-// })
-// });
-// $.ajax({
-// 	url: "/api/user",
-// 	method: 'POST',
-// 	data: { 'ip': '174.132.64.13' }
-// });
-$.ajax({
-	url: "/api/user",
-	method: 'GET',
-}).then(res => console.log(res))
 
-// =============================LOCALSTORAGE==================================================
-
-var lastVisit = localStorage.getItem('lastVisit')
-
-if (lastVisit) {
-	var mins = (Date.now() - parseInt(lastVisit)) / 60
-	
-	if(mins < 1440) {
+// =========================LOCAL=AND=REMOTE=STORAGE=HANDLING=====================================
+if (localStorage.getItem('userIp')) {
+	let lastVisit = Date.now() - parseInt(localStorage.getItem('lastVisit'));
+	if (lastVisit) {
+		if (lastVisit>86400) {
+			localStorage.setItem('lastVisit',Date.now())	
+		} else {
+			// wait time remaining
+			$('#startDiv').html(`<p>Time remaining <br> to play again.<p> <div><h1>${mins}</h1></div>`)
+		}
+	} else {
+		// wait 24 hours
 		$('#startDiv').html(`<p>Time remaining <br> to play again.<p> <div><h1>${mins}</h1></div>`)
-	}
+
+		// create last visit
+		localStorage.setItem('lastVisti',Date.now());
+	}	
 } else {
-	localStorage.setItem('lastVist',Date.now());
+
+	$.ajax({
+		url: "https://api.ipify.org?format=json",
+		method: 'GET'
+	}).then(res => {
+		console.log(res);
+		localStorage.setItem('userIp', res.ip);
+		localStorage.setItem('lastVisit', Date.now());
+		$.ajax({
+			url: "/api/user",
+			method: 'POST',
+			data: res
+		});
+	});
 };
-
-
+// $.ajax({
+// 	url: "/api/user",
+// 	method: 'GET',
+// }).then(res => console.log(res))
 
 // Start App
 // ============================================================================================
