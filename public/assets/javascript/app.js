@@ -1,6 +1,5 @@
 
-// Sounds
-// ======================================================================================
+// ===============================SOUNDS=======================================================
 const themeSong = document.createElement('audio');
 $(themeSong).attr('src', "assets/sounds/Halo Theme Song Original.mp3");
 const rightAnsSong = document.createElement('audio');
@@ -22,16 +21,18 @@ $(lostDoor).attr('src', 'assets/sounds/creaky-wood-door.mp3')
 const ground = ['./assets/images/background0.png', './assets/images/background1.png', './assets/images/background2.png', './assets/images/background3.png', './assets/images/background4.png', './assets/images/background5.png', './assets/images/background6.png', './assets/images/background7.png'];
 const handRight = ['assets/images/rightHand0.png', 'assets/images/rightHand1.png', 'assets/images/rightHand2.png', 'assets/images/rightHand3.png'];
 const handLeft = ['assets/images/leftHand0.png', 'assets/images/leftHand1.png', 'assets/images/leftHand2.png', 'assets/images/leftHand3.png'];
-// ==============================================================================================
+
+// =================================VARIBLES======================================================
 let questionIndex = 0;
 let intervalId;
 let correctAns;
 let time = 16;
+let mins = 0;
 let rightAnsTotal = 0;
 let wrongAnsTotal = 0;
+var sound = 0;
 
-// Questions and Answers
-// ==============================================================================================
+// ==================================Q&A==========================================================
 let qAndA = [
 	{
 		question: "What is the spirit?",
@@ -63,10 +64,9 @@ let qAndA = [
 	}
 ];
 
-// Start App
-// ============================================================================================
+// =====================================START=APP=================================================
 // Handle visit
-handleVisit();
+// handleVisit();
 // Random question
 qAndA = qAndA.sort(() => 0.5 - Math.random());
 // Random background
@@ -74,67 +74,76 @@ $('body').css("background-image", `url('${ground[Math.floor(Math.random() * grou
 // move hands
 const moveHands = setInterval(move, 3000);
 // Start Triva Game
-$('#startButton').on("click", startGame);
+$('#startButton').on("click", handleVisit);
 //check answer
 $('.ans').on('click', check);
 
 // =========================LOCAL=AND=REMOTE=STORAGE=HANDLING=====================================
-
-
-function count(mins) {
-	var mins = mins--;
+function count() {
+	mins--;
 	var h = mins > 60 ? `${Math.floor(mins / 60)}` : '00';
-	var m = mins % 60 > 10 ? `${mins % 60}` : `0${mins % 60}`;
-	console.log('Time: ',`${h}:${m}`);
+	var m = mins % 60 > 9 ? `${mins % 60}` : `0${mins % 60}`;
 
-	return `${h}:${m}`;
-}
+	$('#startDiv').html(
+		`<h2 class="clockP">Time remaining <br> to play again.</h2> 
+		<div><h1 class="font-effect-fire-animation">${h}:${m}</h1></div>`
+	);
+	console.log('Sound', sound);
 
-function clock(mins) {
-	return setInterval(count(mins), 60000);
+	switch (true) {
+		case sound == 0:
+			return lostLaugh.play();
+		case sound == 3:
+			return lostDoor.play();
+		case sound == 5:
+			return winBells.play();
+		case sound == 7:
+			return lostLaugh.play();
+		// case sound > 9:
+		// 	return sound = 0;
+	};
+
+	sound++;
 };
 
-
+function clock() {
+	intervalId = setInterval(count, 5000);
+};
 
 function handleVisit() {
 	var userIP = localStorage.getItem('userIP');
 	var lastVisit = parseInt(localStorage.getItem('lastVisit'));
 
 	if (lastVisit) {
-		var minsLastVisit = (Date.now() - lastVisit) / 60000;
+		var minsLastVisit = Math.floor((Date.now() - lastVisit) / 60000);
 
-		if (minsLastVisit) {
-			if (minsLastVisit > 1440) {
-				localStorage.setItem('lastVisit', Date.now())
-			} else {
-				// wait time remaining
-				$('#startDiv').html(`<p>Time remaining <br> to play again.<p> <div><h1>${clock(Math.floor(1440 - minsLastVisit))}</h1></div>`)
-			}
-		} else {
-			// wait 24 hours
-			$('#startDiv').html(`<p>Time remaining <br> to play again.<p> <div><h1>${minsLastVisit}</h1></div>`)
-
-			// create last visit
-			localStorage.setItem('lastVisti', Date.now());
+		if (minsLastVisit < 1440) {
+			mins = 1440 - minsLastVisit;
+			return clock();
 		};
-		// } else {
-
-		// 	$.ajax({
-		// 		url: "https://api.ipify.org?format=json",
-		// 		method: 'GET'
-		// 	}).then(res => {
-		// 		console.log(res);
-		// 		localStorage.setItem('userIP', res.ip);
-		// 		localStorage.setItem('lastVisit', Date.now());
-		// 		$.ajax({
-		// 			url: "/api/user",
-		// 			method: 'POST',
-		// 			data: res
-		// 		});
-		// 	});
-		// };
 	};
+
+	localStorage.setItem('lastVisit', Date.now())
+	startGame();
 };
+
+
+
+// 	$.ajax({
+// 		url: "https://api.ipify.org?format=json",
+// 		method: 'GET'
+// 	}).then(res => {
+// 		console.log(res);
+// 		localStorage.setItem('userIP', res.ip);
+// 		localStorage.setItem('lastVisit', Date.now());
+// 		$.ajax({
+// 			url: "/api/user",
+// 			method: 'POST',
+// 			data: res
+// 		});
+// 	});
+// };
+
 
 // $.ajax({
 // 	url: "/api/user",
@@ -250,4 +259,4 @@ function check() {
 		wrongAnsSong.play();
 	};
 	nextQuestion();
-}
+};

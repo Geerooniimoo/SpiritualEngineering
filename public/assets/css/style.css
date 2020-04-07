@@ -6,13 +6,19 @@ body {
 }
 #title {
     height: 203px;
+    margin-top: 10vh;
 }
-#title1 {
+.title1 {
     text-align: center;
-	font-size: 4rem;
+	font-size: 5rem;
     color: darkred;
     line-height: .9;
     font-family: Merriweather;
+}
+.clockP {
+    font-family: Merriweather;
+    color: black;
+    text-shadow: 0 0 80px white;
 }
 #hands {
     height: 153px;
