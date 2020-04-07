@@ -79,37 +79,6 @@ $('#startButton').on("click", handleVisit);
 $('.ans').on('click', check);
 
 // =========================LOCAL=AND=REMOTE=STORAGE=HANDLING=====================================
-function count() {
-	mins--;
-	var h = mins > 60 ? `${Math.floor(mins / 60)}` : '00';
-	var m = mins % 60 > 9 ? `${mins % 60}` : `0${mins % 60}`;
-
-	$('#startDiv').html(
-		`<h2 class="clockP">Time remaining <br> to play again.</h2> 
-		<div><h1 class="font-effect-fire-animation">${h}:${m}</h1></div>`
-	);
-	console.log('Sound', sound);
-
-	switch (true) {
-		case sound == 0:
-			return lostLaugh.play();
-		case sound == 3:
-			return lostDoor.play();
-		case sound == 5:
-			return winBells.play();
-		case sound == 7:
-			return lostLaugh.play();
-		// case sound > 9:
-		// 	return sound = 0;
-	};
-
-	sound++;
-};
-
-function clock() {
-	intervalId = setInterval(count, 5000);
-};
-
 function handleVisit() {
 	var userIP = localStorage.getItem('userIP');
 	var lastVisit = parseInt(localStorage.getItem('lastVisit'));
@@ -119,7 +88,9 @@ function handleVisit() {
 
 		if (minsLastVisit < 1440) {
 			mins = 1440 - minsLastVisit;
-			return clock();
+			mins = 10;
+			clock();
+			return setInterval(clock, 5000);
 		};
 	};
 
@@ -127,7 +98,39 @@ function handleVisit() {
 	startGame();
 };
 
+function clock() {
+	mins--;
+	var h = mins > 60 ? `${Math.floor(mins / 60)}` : '00';
+	var m = mins % 60 > 9 ? `${mins % 60}` : `0${mins % 60}`;
 
+	$('#startDiv').html(
+		`<h2 class="clockP">Time remaining <br> to play again.</h2> 
+		<div><h1 class="font-effect-fire-animation">${h}:${m}</h1></div>`
+	);
+
+	sound++;
+	console.log('Sound', sound);
+
+	switch (true) {
+		case mins == 2:
+			return lostDoor.play();
+		case mins == 1:
+			return winBells.play();
+		case mins == 0:
+			return location.reload();
+		case sound == 1:
+			return lostLaugh.play();
+		case sound == 3:
+			return winBells.play();
+		case sound == 5:
+			return lostDoor.play();
+		case sound == 7:
+			return lostLaugh.play();
+		case sound > 12:
+			return sound = 0;
+	};
+
+};
 
 // 	$.ajax({
 // 		url: "https://api.ipify.org?format=json",
