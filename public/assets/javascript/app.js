@@ -88,9 +88,8 @@ function handleVisit() {
 
 		if (minsLastVisit < 1440) {
 			mins = 1440 - minsLastVisit;
-			mins = 10;
 			clock();
-			return setInterval(clock, 5000);
+			return setInterval(clock, 60000);
 		};
 	
 	} else { register() };
