@@ -103,7 +103,7 @@ function clock() {
 	var m = mins % 60 > 9 ? `${mins % 60}` : `0${mins % 60}`;
 
 	$('#startDiv').html(
-		`<h2 class="clockP">Time remaining <br> to play again.</h2> 
+		`<h2 class="clockP">THIS IS A GOOD TIME TO REFLECT</h2> 
 		<div><h1 class="font-effect-fire-animation">${h}:${m}</h1></div>`
 	);
 
