@@ -92,9 +92,9 @@ function handleVisit() {
 			clock();
 			return setInterval(clock, 5000);
 		};
-	};
-
-	localStorage.setItem('lastVisit', Date.now())
+	
+	} else { register() };
+	
 	startGame();
 };
 
@@ -129,23 +129,23 @@ function clock() {
 		case sound > 12:
 			return sound = 0;
 	};
-
 };
 
-// 	$.ajax({
-// 		url: "https://api.ipify.org?format=json",
-// 		method: 'GET'
-// 	}).then(res => {
-// 		console.log(res);
-// 		localStorage.setItem('userIP', res.ip);
-// 		localStorage.setItem('lastVisit', Date.now());
-// 		$.ajax({
-// 			url: "/api/user",
-// 			method: 'POST',
-// 			data: res
-// 		});
-// 	});
-// };
+function register() {
+	$.ajax({
+		url: "https://api.ipify.org?format=json",
+		method: 'GET'
+	}).then(res => {
+		console.log(res);
+		localStorage.setItem('userIP', res.ip);
+		localStorage.setItem('lastVisit', Date.now());
+		$.ajax({
+			url: "/api/user",
+			method: 'POST',
+			data: res
+		});
+	});
+};
 
 
 // $.ajax({
