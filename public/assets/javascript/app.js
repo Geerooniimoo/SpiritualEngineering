@@ -18,11 +18,11 @@ const lostLaugh = document.createElement('audio');
 $(lostLaugh).attr('src', 'assets/sounds/man-laughing.mp3')
 const lostDoor = document.createElement('audio');
 $(lostDoor).attr('src', 'assets/sounds/creaky-wood-door.mp3')
+
+// =================================VARIBLES======================================================
 const ground = ['./assets/images/background0.png', './assets/images/background1.png', './assets/images/background2.png', './assets/images/background3.png', './assets/images/background4.png', './assets/images/background5.png', './assets/images/background6.png', './assets/images/background7.png'];
 const handRight = ['assets/images/rightHand0.png', 'assets/images/rightHand1.png', 'assets/images/rightHand2.png', 'assets/images/rightHand3.png'];
 const handLeft = ['assets/images/leftHand0.png', 'assets/images/leftHand1.png', 'assets/images/leftHand2.png', 'assets/images/leftHand3.png'];
-
-// =================================VARIBLES======================================================
 let questionIndex = 0;
 let intervalId;
 let correctAns;
@@ -31,38 +31,6 @@ let mins = 0;
 let rightAnsTotal = 0;
 let wrongAnsTotal = 0;
 var sound = 0;
-
-// ==================================Q&A==========================================================
-let qAndA = [
-	{
-		question: "What is the spirit?",
-		answers: ["a ghost", "what we become once we die", "what God and the Devil are fighting for", "the nonphysical part of a person"]
-	},
-	{
-		question: "What is God if it's not defined by religion?",
-		answers: ["Jesus", "nothing", "Allah", "the universe"]
-	},
-	{
-		question: "If iternal life begins with an eternal sleep, when will the spirit wake up?",
-		answers: ["right away but it cannot be seen because is in a nonphysical form", "right away somewhere else", "after an eternity", "never"]
-	},
-	{
-		question: "Can the flow of enery teach us about right and wrong?",
-		answers: ["no, because enery cannot reason", "yes, because enery always follow the shortest path", "no, because enery is not alive", "yes, because it can inspire purpose by it's persuit of balance"]
-	},
-	{
-		question: "What is the meaning of evil?",
-		answers: ["the absence of good", "all the Devil does", "ignorance", "depravity"]
-	},
-	{
-		question: "What is the meaning of good?",
-		answers: ["light", "what is needed to go to heaven", "the absence of evil", "righteousness"]
-	},
-	{
-		question: "According to popular views, what is the meaning of life?",
-		answers: ["to discover the creator", "to focus on spiritual growth and serive to humanity", "to seek devine salvation through the grace of God", "to resolve the imbalance of the mind by understanding the nature of reality"]
-	}
-];
 
 // =====================================START=APP=================================================
 // Handle visit
@@ -88,12 +56,13 @@ function handleVisit() {
 
 		if (minsLastVisit < 1440) {
 			mins = 1440 - minsLastVisit;
+			$('.title1').addClass('font-effect-fire-animation');
 			clock();
 			return setInterval(clock, 60000);
 		};
-	
+
 	} else { register() };
-	
+
 	startGame();
 };
 
@@ -101,15 +70,12 @@ function clock() {
 	mins--;
 	var h = mins > 60 ? `${Math.floor(mins / 60)}` : '00';
 	var m = mins % 60 > 9 ? `${mins % 60}` : `0${mins % 60}`;
-
 	$('#startDiv').html(
 		`<h2 class="clockP">THIS IS A GOOD TIME TO REFLECT</h2> 
 		<div><h1 class="font-effect-fire-animation">${h}:${m}</h1></div>`
 	);
 
 	sound++;
-	console.log('Sound', sound);
-
 	switch (true) {
 		case mins == 2:
 			return lostDoor.play();
@@ -135,7 +101,6 @@ function register() {
 		url: "https://api.ipify.org?format=json",
 		method: 'GET'
 	}).then(res => {
-		console.log(res);
 		localStorage.setItem('userIP', res.ip);
 		localStorage.setItem('lastVisit', Date.now());
 		$.ajax({
@@ -145,12 +110,6 @@ function register() {
 		});
 	});
 };
-
-
-// $.ajax({
-// 	url: "/api/user",
-// 	method: 'GET',
-// }).then(res => console.log(res))
 
 function startGame() {
 	themeSong.play();
@@ -174,7 +133,7 @@ function displayQuestions() {
 
 function nextQuestion() {
 	questionIndex++;
-	if (questionIndex >= qAndA.length) {
+	if (questionIndex >= 7) {
 		clearInterval(intervalId);
 		$('#bodyRows').hide();
 		themeSong.pause();
@@ -195,7 +154,7 @@ function score() {
 		winSong.play();
 		winTrump.play();
 		winBells.play();
-		$('#title1').css('color', 'white');
+		$('.title1').css('color', 'white');
 		$('#rightHand').attr('src', handRight[3]);
 		$('#rightHand').animate({ height: '+=5%', width: '+=5%' }, 3000);
 		$('#leftHand').attr('src', handLeft[3]);
@@ -205,22 +164,24 @@ function score() {
 		lostSong.play();
 		lostDoor.play();
 		lostLaugh.play();
-		$('#title1').addClass('font-effect-fire-animation');
+		$('.title1').addClass('font-effect-fire-animation');
 		move2();
 	};
 };
 function move2() {
 	$('#rightHand').attr('src', handRight[1]);
-	$('#rightHand').animate({ height: '500px', width: '500px', top: '0%', left: '0%' }, 3000);
+	$('#rightHand').animate({ height: '1500px', width: '1500px', top: '0%', left: '-50%' }, 3000);
 	$('#rightHand').promise().done(function () {
 		$('#rightHand').attr('src', handRight[2]);
+		// $('#rightHand').animate({ height: '150px', width: '150px', top: '50%' }, 3000);
 		$('#rightHand').animate({ height: '150px', width: '150px', top: '50%', left: '35%' }, 3000);
 	});
 
 	$('#leftHand').attr('src', handLeft[1]);
-	$('#leftHand').animate({ height: '500px', width: '500px', top: '0%', right: '0%' }, 3000);
+	$('#leftHand').animate({ height: '1500px', width: '1500px', top: '0%', right: '-50%' }, 3000);
 	$('#leftHand').promise().done(function () {
 		$('#leftHand').attr('src', handLeft[2]);
+		// $('#leftHand').animate({ height: '150px', width: '150px', top: '50%' }, 3000);
 		$('#leftHand').animate({ height: '150px', width: '150px', top: '50%', right: '35%' }, 3000);
 	});
 };
@@ -250,9 +211,6 @@ function move() {
 
 function check() {
 	const userAns = event.target.innerHTML;
-	console.log(qAndA[questionIndex].question)
-	console.log("User Answer: ", userAns);
-	console.log("Correct Answer: ", qAndA[questionIndex].answers[3]);
 	if (userAns === correctAns) {
 		rightAnsTotal++
 		rightAnsSong.play();

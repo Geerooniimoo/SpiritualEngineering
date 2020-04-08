@@ -12,7 +12,7 @@ body {
     text-align: center;
 	font-size: 5rem;
     color: darkred;
-    line-height: .9;
+    line-height: 1;
     font-family: Merriweather;
 }
 .clockP {
