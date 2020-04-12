@@ -1,4 +1,8 @@
 
+
+// $('#startDiv').html(`<h4>According to popular views, what is the meaning of life?</h4>
+// <h5>to resolve the imbalance of the mind by understanding the nature of reality</h5>`);
+
 // ===============================SOUNDS=======================================================
 const themeSong = document.createElement('audio');
 $(themeSong).attr('src', "assets/sounds/Halo Theme Song Original.mp3");
@@ -50,20 +54,19 @@ $('.ans').on('click', check);
 function handleVisit() {
 	var userIP = localStorage.getItem('userIP');
 	var lastVisit = parseInt(localStorage.getItem('lastVisit'));
+	var minsLastVisit = Math.floor((Date.now() - lastVisit) / 60000);
 
-	if (lastVisit) {
-		var minsLastVisit = Math.floor((Date.now() - lastVisit) / 60000);
+	console.log('MinsLastVisit: ', minsLastVisit);
 
-		if (minsLastVisit < 1440) {
-			mins = 1440 - minsLastVisit;
-			$('.title1').addClass('font-effect-fire-animation');
-			clock();
-			return setInterval(clock, 60000);
-		};
+
+	if (minsLastVisit < 1440) {
+		mins = 1440 - minsLastVisit;
+		$('.title1').addClass('font-effect-fire-animation');
+		clock();
+		return setInterval(clock, 60000);
 
 	} else { register() };
 
-	startGame();
 };
 
 function clock() {
@@ -102,19 +105,22 @@ function register() {
 		method: 'GET'
 	}).then(res => {
 		localStorage.setItem('userIP', res.ip);
-		localStorage.setItem('lastVisit', Date.now());
 		$.ajax({
 			url: "/api/user",
 			method: 'POST',
 			data: res
 		});
 	});
+	startGame();
 };
 
 function startGame() {
+	localStorage.setItem('lastVisit', Date.now());
 	themeSong.play();
 	$("#startDiv").hide();
 	$("#bodyRows").show(5000);
+	$('#leftHand').show(5000);
+	$('#rightHand').show(5000);
 	displayQuestions();
 };
 
@@ -134,9 +140,6 @@ function displayQuestions() {
 function nextQuestion() {
 	questionIndex++;
 	if (questionIndex >= 7) {
-		clearInterval(intervalId);
-		$('#bodyRows').hide();
-		themeSong.pause();
 		score();
 	}
 	else {
@@ -145,35 +148,60 @@ function nextQuestion() {
 };
 
 function score() {
+	clearInterval(intervalId);
+	$('#bodyRows').hide();
+	themeSong.pause();
+	$('#startDiv').hide();
 	$('#scoreBoard').show(1000);
 	$('#rightAns').html(rightAnsTotal);
 	$('#wrongAns').html(wrongAnsTotal);
 	clearInterval(moveHands);
 
-	if (rightAnsTotal > wrongAnsTotal) {
-		winSong.play();
-		winTrump.play();
-		winBells.play();
-		$('.title1').css('color', 'white');
-		$('#rightHand').attr('src', handRight[3]);
-		$('#rightHand').animate({ height: '+=5%', width: '+=5%' }, 3000);
-		$('#leftHand').attr('src', handLeft[3]);
-		$('#leftHand').animate({ height: '+=10%', width: '+=10%', right: '-=5%' }, 3000);
-	}
-	else {
-		lostSong.play();
-		lostDoor.play();
-		lostLaugh.play();
-		$('.title1').addClass('font-effect-fire-animation');
-		move2();
-	};
+	rightAnsTotal > wrongAnsTotal ? move1() : move2();
 };
+
+function move1() {
+	// winTrump.play();
+	winBells.play();
+	$('.title1').css('color', 'white');
+	$('#rightHand').attr('src', handRight[3]);
+	$('#leftHand').attr('src', handLeft[3]);
+	localStorage.setItem('lastVisit', 1440);
+	setTimeout(() => {
+		winBells.pause()
+		$('#scoreBoard').hide(1000);
+		winSong.play();
+		$('#leftHand').attr('src', handLeft[1]);
+		$('#rightHand').attr('src', handRight[1]);
+		$('#leftHand').css('transform', `rotate(${100}deg)`);
+		$('#rightHand').css('transform', `rotate(${260}deg)`);
+		$('#rightHand').animate({ height: '+=20%', width: '+=20%', left: '-=5%' }, 3000);
+		$('#leftHand').animate({ height: '+=20%', width: '+=20%', right: '-=5%' }, 3000);
+		$('#startDiv').css('opacity', .65);
+		setTimeout(() => { $('#startDiv').show(100) }, 3000);
+		$('#startDiv').html(rewards[Math.floor(Math.random() * rewards.length)]);
+		setTimeout(() => {
+			$('.title1').hide(5000);
+			$('#leftHand').hide(5000);
+			$('#rightHand').hide(5000);
+			$('#startDiv').hide(1000);
+			setTimeout(() => {
+				$('.title1').html('<h6>Thank you <br> for <br> playing!</h6>');
+				$('.title1').show(5000);
+			}, 6000);
+		}, 13000);
+	}, 10000);
+};
+
 function move2() {
+	lostSong.play();
+	lostDoor.play();
+	lostLaugh.play();
+	$('.title1').addClass('font-effect-fire-animation');
 	$('#rightHand').attr('src', handRight[1]);
 	$('#rightHand').animate({ height: '1500px', width: '1500px', top: '0%', left: '-50%' }, 3000);
 	$('#rightHand').promise().done(function () {
 		$('#rightHand').attr('src', handRight[2]);
-		// $('#rightHand').animate({ height: '150px', width: '150px', top: '50%' }, 3000);
 		$('#rightHand').animate({ height: '150px', width: '150px', top: '50%', left: '35%' }, 3000);
 	});
 
@@ -181,7 +209,6 @@ function move2() {
 	$('#leftHand').animate({ height: '1500px', width: '1500px', top: '0%', right: '-50%' }, 3000);
 	$('#leftHand').promise().done(function () {
 		$('#leftHand').attr('src', handLeft[2]);
-		// $('#leftHand').animate({ height: '150px', width: '150px', top: '50%' }, 3000);
 		$('#leftHand').animate({ height: '150px', width: '150px', top: '50%', right: '35%' }, 3000);
 	});
 };

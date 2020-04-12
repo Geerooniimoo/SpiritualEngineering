@@ -7,10 +7,10 @@ var qAndA = [
 		question: "What is God if it's not defined by religion?",
 		answers: ["Jesus", "nothing", "Allah", "the universe"]
 	},
-	{
-		question: "If iternal life begins with an eternal sleep, when will the spirit wake up?",
-		answers: ["right away but it cannot be seen because is in a nonphysical form", "right away somewhere else", "after an eternity", "never"]
-	},
+	// {
+		// question: "If iternal life begins with an eternal sleep, when will the spirit wake up?",
+		// answers: ["right away but it cannot be seen because is in a nonphysical form", "right away somewhere else", "after an eternity", "never"]
+	// },
 	{
 		question: "Can the flow of enery teach us about right and wrong?",
 		answers: ["no, because enery cannot reason", "yes, because enery always follow the shortest path", "no, because enery is not alive", "yes, because it can inspire purpose by it's persuit of balance"]

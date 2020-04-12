@@ -6,7 +6,7 @@ body {
 }
 #title {
     height: 203px;
-    margin-top: 10vh;
+    margin-top: 5vh;
 }
 .title1 {
     text-align: center;
@@ -24,6 +24,7 @@ body {
     height: 153px;
 }
 #leftHand {
+    display: none;
     position: fixed;
     right: 10%;
     top: 20%;
@@ -32,6 +33,7 @@ body {
     z-index: 2;
 }
 #rightHand {
+    display: none;
     position: fixed;
     left: 10%;
     top: 20%;
@@ -53,7 +55,7 @@ body {
     height: 140px;
     position: fixed;
     left: 30%;
-    top: 30%;
+    top: 35%;
 }
 #timer {
     text-align: center;
@@ -95,7 +97,7 @@ body {
     border: solid;
     border-width: 1px;
     width: 70%;
-    height: 170px;
+    height: fit-content;
     bottom: 5%;
 }
 .ans:hover {
@@ -108,6 +110,9 @@ body {
     font-style: oblique;
     font-weight: bold;
     font-size: 20px;
+}
+.reward {
+    margin: 5%;
 }
 
 #bodyRows{

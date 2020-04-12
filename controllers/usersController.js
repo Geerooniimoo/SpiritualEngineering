@@ -21,11 +21,19 @@ module.exports = {
   },
   saveUser(req, res) {
     db.Users
-      .create(req.body)
-      .then(dbUsers => res.json(dbUsers))
-      .catch((err) => {
-        console.log(err);
-        res.json(err);
+      .find(req.body)
+      .then(res => {
+        res
+          ? db.Users
+            .update(req.body, { $push: { 'users': Date.now() } })
+            .then(dbUsers => res.json(dbUsers))
+          : db.Users
+            .create(req.body)
+            .then(dbUsers => res.json(dbUsers))
+            .catch((err) => {
+              console.log(err);
+              res.json(err);
+            });
       });
   },
   deleteUser(req, res) {
