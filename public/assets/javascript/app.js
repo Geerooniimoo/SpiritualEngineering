@@ -155,6 +155,7 @@ function score() {
 	$('#scoreBoard').show(1000);
 	$('#rightAns').html(rightAnsTotal);
 	$('#wrongAns').html(wrongAnsTotal);
+	setTimeout(() => { $('#scoreBoard').hide() }, 3000);
 	clearInterval(moveHands);
 
 	rightAnsTotal > wrongAnsTotal ? move1() : move2();
@@ -185,12 +186,11 @@ function move1() {
 			$('#leftHand').hide(5000);
 			$('#rightHand').hide(5000);
 			$('#startDiv').hide(1000);
-			setTimeout(() => {
-				$('.title1').html('<h6>Thank you <br> for <br> playing!</h6>');
-				$('.title1').show(5000);
-			}, 6000);
 		}, 13000);
 	}, 10000);
+	setTimeout(() => {
+		$('.title1').html('Thank you <br> for <br> playing!');
+	}, 13000);
 };
 
 function move2() {
@@ -203,6 +203,9 @@ function move2() {
 	$('#rightHand').promise().done(function () {
 		$('#rightHand').attr('src', handRight[2]);
 		$('#rightHand').animate({ height: '150px', width: '150px', top: '50%', left: '35%' }, 3000);
+		setTimeout(() => {
+			$('#rightHand').animate({ opacity: 0 }, 2000);
+		}, 2500);
 	});
 
 	$('#leftHand').attr('src', handLeft[1]);
@@ -210,11 +213,17 @@ function move2() {
 	$('#leftHand').promise().done(function () {
 		$('#leftHand').attr('src', handLeft[2]);
 		$('#leftHand').animate({ height: '150px', width: '150px', top: '50%', right: '35%' }, 3000);
+		setTimeout(() => {
+			$('#leftHand').animate({ opacity: 0 }, 2000);
+		}, 2500);
 	});
+	setTimeout(() => {
+		$('#scoreBoard').html('<h6>Thank you <br> for <br> playing!</h6>')
+	}, 5000);
 };
 
 function timer() {
-	time = 16;
+	time = 6;
 	clearInterval(intervalId);
 	intervalId = setInterval(decrement, 1000);
 };
@@ -222,7 +231,8 @@ function timer() {
 function decrement() {
 	time--;
 	$("#timer").html(time);
-	if (time === 0) {
+	if (time == 0) {
+		rewards.push(`<h4>${qAndA[questionIndex].question}</h4><h4>${correctAns}</h4>`)
 		wrongAnsTotal++;
 		wrongAnsSong.play();
 		clearInterval(intervalId);
@@ -243,6 +253,7 @@ function check() {
 		rightAnsSong.play();
 	} else {
 		wrongAnsTotal++;
+		rewards.push(`<h4>${qAndA[questionIndex].question}</h4><h4>${correctAns}</h4>`)
 		wrongAnsSong.play();
 	};
 	nextQuestion();
