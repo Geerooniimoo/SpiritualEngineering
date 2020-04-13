@@ -149,14 +149,16 @@ function nextQuestion() {
 
 function score() {
 	clearInterval(intervalId);
+	clearInterval(moveHands);
 	$('#bodyRows').hide();
 	themeSong.pause();
 	$('#startDiv').hide();
-	$('#scoreBoard').show(1000);
 	$('#rightAns').html(rightAnsTotal);
 	$('#wrongAns').html(wrongAnsTotal);
-	setTimeout(() => { $('#scoreBoard').hide() }, 3000);
-	clearInterval(moveHands);
+	$('#scoreBoard').css('opacity',0);
+	$('#scoreBoard').show();
+	$('#scoreBoard').animate({opacity: 1},2000);
+	setTimeout(() => { $('#scoreBoard').hide() }, 5000);
 
 	rightAnsTotal > wrongAnsTotal ? move1() : move2();
 };
@@ -178,19 +180,19 @@ function move1() {
 		$('#rightHand').css('transform', `rotate(${260}deg)`);
 		$('#rightHand').animate({ height: '+=20%', width: '+=20%', left: '-=5%' }, 3000);
 		$('#leftHand').animate({ height: '+=20%', width: '+=20%', right: '-=5%' }, 3000);
-		$('#startDiv').css('opacity', .65);
-		setTimeout(() => { $('#startDiv').show(100) }, 3000);
+		$('#startDiv').css('opacity', 0);
+		$('#startDiv').show();
+		setTimeout(() => { $('#startDiv').animate({opacity:1},2000) }, 3000);
 		$('#startDiv').html(rewards[Math.floor(Math.random() * rewards.length)]);
 		setTimeout(() => {
-			$('.title1').hide(5000);
 			$('#leftHand').hide(5000);
 			$('#rightHand').hide(5000);
-			$('#startDiv').hide(1000);
-		}, 13000);
+			$('#startDiv').css('opacity',0);
+		}, 10000);
 	}, 10000);
 	setTimeout(() => {
-		$('.title1').html('Thank you <br> for <br> playing!');
-	}, 13000);
+		$('.title1').text('Thank you for playing!');
+	}, 25000);
 };
 
 function move2() {
@@ -218,8 +220,15 @@ function move2() {
 		}, 2500);
 	});
 	setTimeout(() => {
-		$('#scoreBoard').html('<h6>Thank you <br> for <br> playing!</h6>')
-	}, 5000);
+		$('.title1').text('Thank you for playing!')
+		setTimeout(() => {
+			$('#startDiv').html(rewards[Math.floor(Math.random()*rewards.length)]);
+			$('#startDiv').css('opacity',0);
+			$('#startDiv').show();
+			$('#startDiv').animate({opacity: 1},3000);
+			$('#startDiv').animate({opacity: 0},13000);
+		}, 3000);
+	}, 16000);
 };
 
 function timer() {
