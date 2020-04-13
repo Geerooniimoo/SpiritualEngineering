@@ -223,7 +223,7 @@ function move2() {
 };
 
 function timer() {
-	time = 6;
+	time = 16;
 	clearInterval(intervalId);
 	intervalId = setInterval(decrement, 1000);
 };
