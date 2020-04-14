@@ -42,8 +42,5 @@ var qAndA = [
 	{
 		question: 'What is the spirit?',
 		answers: ['A ghost','A creation of religion','The after life','the universe\'s intellectual begining']
-	},
-	{
-
 	}
 ];
