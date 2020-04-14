@@ -28,7 +28,22 @@ var qAndA = [
 		answers: ["What my religion says", "Everything", "Nothing", "Suprime intelligence"]
 	},
 	{
-		question: "According to popular views, what is the meaning of life?",
+		question: "What is the meaning of life?",
 		answers: ["to discover the creator", "to focus on spiritual growth and serive to humanity", "to seek devine salvation through the grace of God", "to resolve the imbalance of the mind by understanding the nature of reality"]
+	},
+	{
+		question: 'What is the meaning of infinite?',
+		answers: ['everything','nothing','the universe','what has no begining nor end']
+	},
+	{
+		question: 'Can man understand God\'s intimate nature?',
+		answers: ['Yes, religion teaches us.', 'No, man is too ingnorant.', 'Yes, man is smart enough.','No, man is missing a sense.']
+	},
+	{
+		question: 'What is the spirit?',
+		answers: ['A ghost','A creation of religion','The after life','the universe\'s intellectual begining']
+	},
+	{
+
 	}
 ];
