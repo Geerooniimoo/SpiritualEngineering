@@ -187,7 +187,7 @@ function move1() {
 		setTimeout(() => {
 			$('#leftHand').hide(5000);
 			$('#rightHand').hide(5000);
-			$('#startDiv').css('opacity',0);
+			$('#startDiv').animate({opacity: 0},5000);
 		}, 10000);
 	}, 10000);
 	setTimeout(() => {

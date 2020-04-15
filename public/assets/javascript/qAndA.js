@@ -32,7 +32,7 @@ var qAndA = [
 		answers: ["to discover the creator", "to focus on spiritual growth and serive to humanity", "to seek devine salvation through the grace of God", "to resolve the imbalance of the mind by understanding the nature of reality"]
 	},
 	{
-		question: 'What is the meaning of infinite?',
+		question: 'What is the meaning of infinity?',
 		answers: ['everything','nothing','the universe','what has no begining nor end']
 	},
 	{
