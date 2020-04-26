@@ -16,6 +16,10 @@ var qAndA = [
 		answers: ["no, because enery cannot reason", "yes, because enery always follow the shortest path", "no, because enery is not alive", "yes, because it can inspire purpose by it's persuit of balance"]
 	},
 	{
+		question: "Is the universal space infinite?",
+		answers: ['No, nothing is.','Yes, because the Bible says so.','No, everything that has a begining, most have an end.','Yes, because if it wasn\'t, what came next would still be part of it.']
+	},
+	{
 		question: "What is the meaning of evil?",
 		answers: ["the absence of good", "all the Devil does", "ignorance", "depravity"]
 	},
@@ -42,5 +46,13 @@ var qAndA = [
 	{
 		question: 'What is the spirit?',
 		answers: ['A ghost','A creation of religion','The after life','the universe\'s intellectual begining']
+	},
+	{
+		question: 'Does the universal space have a limit?',
+		answers: ['Yes, everything does.','No, because the Bible says so.','Yes, everything that has a begining, most have an end.','No, because if it did, what came next would still be part of it.']
+	},
+	{
+		question: 'Does absolute emptiness exist?',
+		answers: ['Yes, when God is not present.','No, air will remain.','Yes, when nothing can be seen.','No, what seems empty is occupied by matter which escapes instruments or sense.']
 	}
 ];
