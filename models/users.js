@@ -1,13 +1,39 @@
+const { Model, DataTypes } = require('sequelize');
+const sequelize = require('../config/connection');
 
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+class Users extends Model {};
 
-const usersSchema = new Schema({
-    ip: { type: String, unique: true },
-    answers: String,
-    visits: Number,
-    visited: { type: Date, default: Date.now }
-});
+Users.init(
+    {
+        id: {
+            type: DataTypes.INTEGER,
+            autoIncrement: true,
+            primaryKey: true
+        },
+        ip: {
+            type:DataTypes.STRING,
+            allowNull: false
+        },
+        answers: {
+            type: DataTypes.STRING,
+            defaultValue: ''
+        },
+        visits: {
+            type:DataTypes.INTEGER,
+            defaultValue: 0
+        },
+        lastVisit: {
+            type: DataTypes.DATE,
+            defaultValue: new Date
+        }
+    },
+    {
+        sequelize,
+        timestamps: false,
+        freeTableName: true,
+        underscored: true,
+        modelName: 'users'
+    }
+)
 
-const Users = mongoose.model('Users',usersSchema);
 module.exports = Users;

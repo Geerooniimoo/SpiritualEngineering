@@ -24,10 +24,11 @@ const lostDoor = document.createElement('audio');
 $(lostDoor).attr('src', 'assets/sounds/creaky-wood-door.mp3')
 
 // =================================VARIBLES======================================================
+var updates = { qAndA: [] };
 const ground = ['./assets/images/background0.png', './assets/images/background1.png', './assets/images/background2.png', './assets/images/background3.png', './assets/images/background4.png', './assets/images/background5.png', './assets/images/background6.png', './assets/images/background7.png'];
 const handRight = ['assets/images/rightHand0.png', 'assets/images/rightHand1.png', 'assets/images/rightHand2.png', 'assets/images/rightHand3.png'];
 const handLeft = ['assets/images/leftHand0.png', 'assets/images/leftHand1.png', 'assets/images/leftHand2.png', 'assets/images/leftHand3.png'];
-let questionIndex = 0;
+let qI = 0;
 let intervalId;
 let correctAns;
 let time = 16;
@@ -42,7 +43,7 @@ var sound = 0;
 // Random question
 qAndA = qAndA.sort(() => 0.5 - Math.random());
 // Random background
-$('body').css("background-image", `url('${ground[Math.floor(Math.random() * ground.length)]}')`);
+$('body').css("background-image", `url('./assets/images/bg1.png')`);
 // move hands
 const moveHands = setInterval(move, 3000);
 // Start Triva Game
@@ -52,12 +53,13 @@ $('.ans').on('click', check);
 
 // =========================LOCAL=AND=REMOTE=STORAGE=HANDLING=====================================
 function handleVisit() {
-	var userIP = localStorage.getItem('userIP');
-	var lastVisit = parseInt(localStorage.getItem('lastVisit'));
+	if(localStorage.sessionId == undefined){
+
+
+	};
+
+	var lastVisit = parseInt(localStorage.lastVisit);
 	var minsLastVisit = Math.floor((Date.now() - lastVisit) / 60000);
-
-	console.log('MinsLastVisit: ', minsLastVisit);
-
 
 	if (minsLastVisit < 1440) {
 		mins = 1440 - minsLastVisit;
@@ -103,19 +105,19 @@ function register() {
 	$.ajax({
 		url: "https://api.ipify.org?format=json",
 		method: 'GET'
-	}).then(res => {
-		localStorage.setItem('userIP', res.ip);
+	}).then(ip => {
+		console.log('IP: ',JSON.stringify(ip));
 		$.ajax({
-			url: "/api/user",
+			url: '/api/user',
 			method: 'POST',
-			data: res
-		});
+			data: ip
+		}).then(console.log);
 	});
-	startGame();
 };
 
 function startGame() {
-	localStorage.setItem('lastVisit', Date.now());
+	localStorage.lastVisit = new Date;
+	updates.lastVisit = new Date;
 	themeSong.play();
 	$("#startDiv").hide();
 	$("#bodyRows").show(5000);
@@ -126,20 +128,17 @@ function startGame() {
 
 function displayQuestions() {
 	timer();
-	//display randomized question
-	$('#Question').html(qAndA[questionIndex].question);
-	//correct answer
-	correctAns = qAndA[questionIndex].answers[3];
-	//display randomized answers 
-	let randomAnswers = qAndA[questionIndex].answers.sort(() => 0.5 - Math.random());
+	$('#Question').html(qAndA[qI].question);
+	correctAns = qAndA[qI].answers[3];
+	let randomAnswers = qAndA[qI].answers.sort(() => 0.5 - Math.random());
 	randomAnswers.forEach((answer, i) => {
 		$('#ans' + (i + 1)).html(answer);
 	});
 };
 
 function nextQuestion() {
-	questionIndex++;
-	if (questionIndex >= 7) {
+	qI++;
+	if (qI >= 7) {
 		score();
 	}
 	else {
@@ -155,13 +154,25 @@ function score() {
 	$('#startDiv').hide();
 	$('#rightAns').html(rightAnsTotal);
 	$('#wrongAns').html(wrongAnsTotal);
-	$('#scoreBoard').css('opacity',0);
+	$('#scoreBoard').css('opacity', 0);
 	$('#scoreBoard').show();
-	$('#scoreBoard').animate({opacity: 1},2000);
+	$('#scoreBoard').animate({ opacity: 1 }, 2000);
 	setTimeout(() => { $('#scoreBoard').hide() }, 5000);
 
 	rightAnsTotal > wrongAnsTotal ? move1() : move2();
+
+	handleUpdates();	
 };
+
+function handleUpates() {
+	$.ajax('/api/user/id', {
+		method:'GET',
+	}).then(data=>{
+
+		data != null 
+		? console.log('Data: ',data) : '';
+	});
+}
 
 function move1() {
 	// winTrump.play();
@@ -182,12 +193,12 @@ function move1() {
 		$('#leftHand').animate({ height: '+=20%', width: '+=20%', right: '-=5%' }, 3000);
 		$('#startDiv').css('opacity', 0);
 		$('#startDiv').show();
-		setTimeout(() => { $('#startDiv').animate({opacity:1},2000) }, 3000);
+		setTimeout(() => { $('#startDiv').animate({ opacity: 1 }, 2000) }, 3000);
 		$('#startDiv').html(rewards[Math.floor(Math.random() * rewards.length)]);
 		setTimeout(() => {
 			$('#leftHand').hide(5000);
 			$('#rightHand').hide(5000);
-			$('#startDiv').animate({opacity: 0},5000);
+			$('#startDiv').animate({ opacity: 0 }, 5000);
 		}, 10000);
 	}, 10000);
 	setTimeout(() => {
@@ -222,11 +233,11 @@ function move2() {
 	setTimeout(() => {
 		$('.title1').text('Thank you for playing!')
 		setTimeout(() => {
-			$('#startDiv').html(rewards[Math.floor(Math.random()*rewards.length)]);
-			$('#startDiv').css('opacity',0);
+			$('#startDiv').html(rewards[Math.floor(Math.random() * rewards.length)]);
+			$('#startDiv').css('opacity', 0);
 			$('#startDiv').show();
-			$('#startDiv').animate({opacity: 1},3000);
-			$('#startDiv').animate({opacity: 0},13000);
+			$('#startDiv').animate({ opacity: 1 }, 3000);
+			$('#startDiv').animate({ opacity: 0 }, 13000);
 		}, 3000);
 	}, 16000);
 };
@@ -241,7 +252,7 @@ function decrement() {
 	time--;
 	$("#timer").html(time);
 	if (time == 0) {
-		rewards.push(`<h4>${qAndA[questionIndex].question}</h4><h4>${correctAns}</h4>`)
+		rewards.push(`<h4>${qAndA[qI].question}</h4><h4>${correctAns}</h4>`)
 		wrongAnsTotal++;
 		wrongAnsSong.play();
 		clearInterval(intervalId);
@@ -255,14 +266,15 @@ function move() {
 	$('#leftHand').animate({ top: `${Math.random() * 8 + 26}%`, right: `${Math.random() * 4 + 8}%` }, 3000);
 };
 
-function check() {
-	const userAns = event.target.innerHTML;
+function check(event) {
+	const userAns = event.target.innerText;
+	updates.qAndA.push({ question: qAndA[qI].question, answer: userAns })
 	if (userAns === correctAns) {
 		rightAnsTotal++
 		rightAnsSong.play();
 	} else {
 		wrongAnsTotal++;
-		rewards.push(`<h4>${qAndA[questionIndex].question}</h4><h4>${correctAns}</h4>`)
+		rewards.push(`<h4>${qAndA[qI].question}</h4><h4>${correctAns}</h4>`)
 		wrongAnsSong.play();
 	};
 	nextQuestion();
