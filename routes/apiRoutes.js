@@ -6,11 +6,11 @@ const router = require('express').Router();
 
 // match /api/users/:ip
 router
-    .route('/user/:ip')
+    .route('/user/:id')
     .get((req, res) => {
         Users.findOne({
             where: {
-                ip: req.params.ip
+                id: req.params.id
             }
         })
         .then(data => res.json(data))
@@ -40,7 +40,6 @@ router.get('/user',(req,res)=>{
     });
 
 router.post('/user',(req,res)=>{
-        console.log('IP: ',req.body);
         Users.create(req.body)
         .then(data=>res.json(data))
         .catch(err=>{if(err)throw err});

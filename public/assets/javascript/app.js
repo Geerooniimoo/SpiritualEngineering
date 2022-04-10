@@ -1,5 +1,3 @@
-
-
 // $('#startDiv').html(`<h4>According to popular views, what is the meaning of life?</h4>
 // <h5>to resolve the imbalance of the mind by understanding the nature of reality</h5>`);
 
@@ -53,31 +51,54 @@ $('.ans').on('click', check);
 
 // =========================LOCAL=AND=REMOTE=STORAGE=HANDLING=====================================
 function handleVisit() {
-	if(localStorage.sessionId == undefined){
+	let lastVisit = new Date();
+	localStorage.sessionId == undefined
+		? register()
+		: lastVisit = getSessionId();
 
+	console.log('Last Visit: ',localStorage.lastVisit);
+	var minsLastVisit = (Date.now() - new Date(localStorage.lastVisit)) / 3600000;
+	console.log('Mins Since Last Visit: ',minsLastVisit);
 
-	};
-
-	var lastVisit = parseInt(localStorage.lastVisit);
-	var minsLastVisit = Math.floor((Date.now() - lastVisit) / 60000);
-
-	if (minsLastVisit < 1440) {
-		mins = 1440 - minsLastVisit;
+	if (minsLastVisit < 24) {
+		mins = (24 - minsLastVisit)*60;
+		console.log('Mins to play: ',mins);
 		$('.title1').addClass('font-effect-fire-animation');
 		clock();
 		return setInterval(clock, 60000);
+	};
+};
 
-	} else { register() };
+function getSessionId() {
+	$.ajax({
+		url: `/api/user/${localStorage.sessionId}`,
+		method: 'GET'
+	}).then(res=>{
+		localStorage.lastVisit = res.lastVisit;
+	});
+};
 
+function register() {
+	$.ajax({
+		url: "https://api.ipify.org?format=json",
+		method: 'GET'
+	}).then(ip => {
+		$.ajax({
+			url: '/api/user',
+			method: 'POST',
+			data: ip
+		}).then(({id})=>localStorage.sessionId = id);
+	});
 };
 
 function clock() {
 	mins--;
 	var h = mins > 60 ? `${Math.floor(mins / 60)}` : '00';
-	var m = mins % 60 > 9 ? `${mins % 60}` : `0${mins % 60}`;
+	var m = mins % 60 > 9 ? `${Math.floor(mins % 60)}` : `0${Math.floor(mins % 60)}`;
 	$('#startDiv').html(
-		`<h2 class="clockP">THIS IS A GOOD TIME TO REFLECT</h2> 
-		<div><h1 class="font-effect-fire-animation">${h}:${m}</h1></div>`
+		`<h2 class="clockP">TIME REMAINING</h2> 
+		<div><h1 class="font-effect-fire-animation">${h}:${m}</h1></div>
+		<h2 class="clockP">ALLOW YOURSELF TO REFLECT</h2>`
 	);
 
 	sound++;
@@ -99,20 +120,6 @@ function clock() {
 		case sound > 12:
 			return sound = 0;
 	};
-};
-
-function register() {
-	$.ajax({
-		url: "https://api.ipify.org?format=json",
-		method: 'GET'
-	}).then(ip => {
-		console.log('IP: ',JSON.stringify(ip));
-		$.ajax({
-			url: '/api/user',
-			method: 'POST',
-			data: ip
-		}).then(console.log);
-	});
 };
 
 function startGame() {
