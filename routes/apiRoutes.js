@@ -20,14 +20,14 @@ router
         Users.update(
             req.body,
             {where:{
-                ip:req.params.ip
+                id:req.params.id
             }
         }).then(data=>res.json(data));
     })
     .delete((req, res) => {
         Users.destroy({
             where: {
-                ip: req.params.ip
+                id: req.params.id
             }
         }).then(data => res.json(data));
     });

@@ -1,104 +1,58 @@
-// $('#startDiv').html(`<h4>According to popular views, what is the meaning of life?</h4>
-// <h5>to resolve the imbalance of the mind by understanding the nature of reality</h5>`);
 
-// ===============================SOUNDS=======================================================
-const themeSong = document.createElement('audio');
-$(themeSong).attr('src', "assets/sounds/Halo Theme Song Original.mp3");
-const rightAnsSong = document.createElement('audio');
-$(rightAnsSong).attr('src', 'assets/sounds/filling-your-inbox.mp3');
-const wrongAnsSong = document.createElement('audio');
-$(wrongAnsSong).attr('src', 'assets/sounds/nasty-error-long.mp3');
-const winSong = document.createElement('audio');
-$(winSong).attr('src', 'assets/sounds/12-days-of-christmas.mp3');
-const winTrump = document.createElement('audio');
-$(winTrump).attr('src', 'assets/sounds/bugle-3.mp3');
-const winBells = document.createElement('audio');
-$(winBells).attr('src', 'assets/sounds/tower-clock.mp3');
-const lostSong = document.createElement('audio');
-$(lostSong).attr('src', 'assets/sounds/Corpse Party - Gameover.mp3')
-const lostLaugh = document.createElement('audio');
-$(lostLaugh).attr('src', 'assets/sounds/man-laughing.mp3')
-const lostDoor = document.createElement('audio');
-$(lostDoor).attr('src', 'assets/sounds/creaky-wood-door.mp3')
-
-// =================================VARIBLES======================================================
-var updates = { qAndA: [] };
-const ground = ['./assets/images/background0.png', './assets/images/background1.png', './assets/images/background2.png', './assets/images/background3.png', './assets/images/background4.png', './assets/images/background5.png', './assets/images/background6.png', './assets/images/background7.png'];
-const handRight = ['assets/images/rightHand0.png', 'assets/images/rightHand1.png', 'assets/images/rightHand2.png', 'assets/images/rightHand3.png'];
-const handLeft = ['assets/images/leftHand0.png', 'assets/images/leftHand1.png', 'assets/images/leftHand2.png', 'assets/images/leftHand3.png'];
-let qI = 0;
-let intervalId;
-let correctAns;
-let time = 16;
-let mins = 0;
-let rightAnsTotal = 0;
-let wrongAnsTotal = 0;
-var sound = 0;
-
-// =====================================START=APP=================================================
-// Handle visit
-// handleVisit();
-// Random question
-qAndA = qAndA.sort(() => 0.5 - Math.random());
-// Random background
-$('body').css("background-image", `url('./assets/images/bg1.png')`);
-// move hands
 const moveHands = setInterval(move, 3000);
-// Start Triva Game
 $('#startButton').on("click", handleVisit);
-//check answer
 $('.ans').on('click', check);
 
-// =========================LOCAL=AND=REMOTE=STORAGE=HANDLING=====================================
 function handleVisit() {
-	let lastVisit = new Date();
 	localStorage.sessionId == undefined
-		? register()
-		: lastVisit = getSessionId();
-
-	console.log('Last Visit: ',localStorage.lastVisit);
-	var minsLastVisit = (Date.now() - new Date(localStorage.lastVisit)) / 3600000;
-	console.log('Mins Since Last Visit: ',minsLastVisit);
-
-	if (minsLastVisit < 24) {
-		mins = (24 - minsLastVisit)*60;
-		console.log('Mins to play: ',mins);
-		$('.title1').addClass('font-effect-fire-animation');
-		clock();
-		return setInterval(clock, 60000);
-	};
+		? (register(), startGame())
+		: getSessionId();
 };
 
-function getSessionId() {
-	$.ajax({
-		url: `/api/user/${localStorage.sessionId}`,
-		method: 'GET'
-	}).then(res=>{
-		localStorage.lastVisit = res.lastVisit;
-	});
+function reflection(hoursFromVisit) {
+	mins = (24 - hoursFromVisit) * 60;
+	$('.title1').addClass('font-effect-fire-animation');
+	clock();
+	clockId = setInterval(clock, 60000);
+}
+
+async function register() {
+	let ip = await $.ajax("https://api.ipify.org?format=json");
+	let { id } = await $.ajax({ url: '/api/user', method: 'POST', data: ip });
+
+	updates.id = id;
+	updates.ip = ip.ip;
+	localStorage.sessionId = id;
 };
 
-function register() {
-	$.ajax({
-		url: "https://api.ipify.org?format=json",
-		method: 'GET'
-	}).then(ip => {
-		$.ajax({
-			url: '/api/user',
-			method: 'POST',
-			data: ip
-		}).then(({id})=>localStorage.sessionId = id);
-	});
+async function getSessionId() {
+	let data = await $.ajax(`/api/user/${localStorage.sessionId}`);
+	
+	if (!data) return startGame();
+	let hoursFromVisit = (Date.now() - new Date(data.lastVisit)) / 3600000;
+	hoursFromVisit < 24	? reflection(hoursFromVisit) : startGame();
 };
+
+function changeLevel() {
+	level++;
+	let bg = $('<img>',{class:'bg',src:`assets/images/bg${level}.png`});
+	$('body').prepend(bg);
+	bg.css({top:'-100vh'});
+	$('.bg').animate({top:'+=100vh'},3000);
+	setTimeout(()=>{
+		$('.bg').eq($('.bg').length-1).remove()
+	},4000);
+	showLevel(level)
+}
 
 function clock() {
 	mins--;
 	var h = mins > 60 ? `${Math.floor(mins / 60)}` : '00';
-	var m = mins % 60 > 9 ? `${Math.floor(mins % 60)}` : `0${Math.floor(mins % 60)}`;
+	var m = (mins % 60 > 9 ? `` : `0`) + Math.floor(mins % 60);
 	$('#startDiv').html(
-		`<h2 class="clockP">TIME REMAINING</h2> 
+		`<h2 class="clockP">TIME</h2> 
 		<div><h1 class="font-effect-fire-animation">${h}:${m}</h1></div>
-		<h2 class="clockP">ALLOW YOURSELF TO REFLECT</h2>`
+		<h2 class="clockP">TO REFLECT</h2>`
 	);
 
 	sound++;
@@ -108,7 +62,8 @@ function clock() {
 		case mins == 1:
 			return winBells.play();
 		case mins == 0:
-			return location.reload();
+			clearInterval(clockId);
+			return startGame();
 		case sound == 1:
 			return lostLaugh.play();
 		case sound == 3:
@@ -122,15 +77,27 @@ function clock() {
 	};
 };
 
+function showOpacity(str) {
+	let opacity = 0;
+	let	opacityId = setInterval(()=>{
+		document.querySelector(str).style.opacity = opacity; 
+		opacity+=.05; 
+		if(opacity>1)clearInterval(opacityId)},100);
+};
+
 function startGame() {
-	localStorage.lastVisit = new Date;
 	updates.lastVisit = new Date;
 	themeSong.play();
 	$("#startDiv").hide();
-	$("#bodyRows").show(5000);
-	$('#leftHand').show(5000);
-	$('#rightHand').show(5000);
-	displayQuestions();
+	changeLevel();
+	setTimeout(()=>{showOpacity('#bodyRows')},4000);
+	showHands();
+	setTimeout(displayQuestions,4000);
+};
+
+function showHands() {
+	$('#leftHand').show(4000);
+	$('#rightHand').show(4000);
 };
 
 function displayQuestions() {
@@ -145,12 +112,7 @@ function displayQuestions() {
 
 function nextQuestion() {
 	qI++;
-	if (qI >= 7) {
-		score();
-	}
-	else {
-		displayQuestions();
-	};
+	qI >= 7 ? score() : displayQuestions();
 };
 
 function score() {
@@ -166,51 +128,49 @@ function score() {
 	$('#scoreBoard').animate({ opacity: 1 }, 2000);
 	setTimeout(() => { $('#scoreBoard').hide() }, 5000);
 
-	rightAnsTotal > wrongAnsTotal ? move1() : move2();
+	// rightAnsTotal > wrongAnsTotal ? move1() : move2();
 
-	handleUpdates();	
+	// handleUpdates();
 };
 
-function handleUpates() {
-	$.ajax('/api/user/id', {
-		method:'GET',
-	}).then(data=>{
+async function handleUpdates() {
+	let store = await $.ajax(`/api/user/${localStorage.sessionId}`);
+	if (store == null) register();
 
-		data != null 
-		? console.log('Data: ',data) : '';
+	store.lastVisit = updates.lastVisit;
+	let qA = eval(store.qAndA);
+	qA.push(updates.qAndA);
+	store.ip = updates.ip;
+	store.qAndA = JSON.stringify(qA);
+	store.visits++;
+
+	$.ajax({
+		url: `/api/user/$	{store.id}`,
+		method: 'PUT',
+		contentType: 'application/json',
+		data: JSON.stringify(store)
 	});
-}
+};
 
 function move1() {
 	// winTrump.play();
 	winBells.play();
 	$('.title1').css('color', 'white');
-	$('#rightHand').attr('src', handRight[3]);
-	$('#leftHand').attr('src', handLeft[3]);
-	localStorage.setItem('lastVisit', 1440);
+	$('#rightHand').attr('src', handRight[3]).show();
+	$('#leftHand').attr('src', handLeft[3]).show();
 	setTimeout(() => {
 		winBells.pause()
 		$('#scoreBoard').hide(1000);
 		winSong.play();
-		$('#leftHand').attr('src', handLeft[1]);
-		$('#rightHand').attr('src', handRight[1]);
-		$('#leftHand').css('transform', `rotate(${100}deg)`);
-		$('#rightHand').css('transform', `rotate(${260}deg)`);
-		$('#rightHand').animate({ height: '+=20%', width: '+=20%', left: '-=5%' }, 3000);
-		$('#leftHand').animate({ height: '+=20%', width: '+=20%', right: '-=5%' }, 3000);
-		$('#startDiv').css('opacity', 0);
-		$('#startDiv').show();
-		setTimeout(() => { $('#startDiv').animate({ opacity: 1 }, 2000) }, 3000);
-		$('#startDiv').html(rewards[Math.floor(Math.random() * rewards.length)]);
-		setTimeout(() => {
-			$('#leftHand').hide(5000);
-			$('#rightHand').hide(5000);
-			$('#startDiv').animate({ opacity: 0 }, 5000);
-		}, 10000);
+
+		['-=10%','+=20%','-=20%','+=10%']
+			.forEach(hight => $('#rightHand')
+			.animate({top:hight},1000));
+
 	}, 10000);
-	setTimeout(() => {
-		$('.title1').text('Thank you for playing!');
-	}, 25000);
+	// setTimeout(() => {
+	// 	$('.title1').text('Thank you for playing!');
+	// }, 25000);
 };
 
 function move2() {
@@ -286,3 +246,9 @@ function check(event) {
 	};
 	nextQuestion();
 };
+
+function showLevel(num) {
+	let prompt = document.getElementById('level');
+
+	prompt.innerHTML = `<h4 class='level title1 font-effect-3d'>Level ${num}</h4>`
+}

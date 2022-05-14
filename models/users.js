@@ -14,9 +14,9 @@ Users.init(
             type:DataTypes.STRING,
             allowNull: false
         },
-        answers: {
-            type: DataTypes.STRING,
-            defaultValue: ''
+        qAndA: {
+            type: DataTypes.TEXT,
+            defaultValue: '[]'
         },
         visits: {
             type:DataTypes.INTEGER,

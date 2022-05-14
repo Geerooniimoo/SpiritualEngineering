@@ -1,12 +1,41 @@
+* {
+    /* border: 2px solid red; */
+}
 
 body {
-    background-repeat: no-repeat;
-    background-size: 100% 110vh;
-    background-image: url(/assets/images/background5.png)
+    /* background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-image: url(/assets/images/background1.png);
+    background-size: 100% 100vh; */
+    background: #000;
+    position: relative;
+    margin: 0;
+    padding: 0;
 }
 #title {
     height: 203px;
     margin-top: 5vh;
+    width: 100%;
+}
+.level {
+    position: relative;
+    opacity: 0;
+    z-index: 1;
+    animation: level 3s;
+}
+
+@keyframes level {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 1;
+        transform:scale(200%);
+    }
+    100% {
+        transform:scale(200%);
+        opacity: 0;
+    }
 }
 .title1 {
     text-align: center;
@@ -18,7 +47,8 @@ body {
 .clockP {
     font-family: Merriweather;
     color: black;
-    text-shadow: 0 0 80px white;
+    text-shadow: 0 0 10px brown;
+    margin: 0 10px;
 }
 #hands {
     height: 153px;
@@ -32,6 +62,24 @@ body {
     height: 150px;
     z-index: 2;
 }
+
+.bg {
+    margin: 0;
+    padding: 0;
+    height: 105vh;
+    width: 105%;
+    top: -10px;
+    left: -10px;
+    position: fixed;
+    z-index: 1;
+}
+
+main {
+    width: 100%;
+    position: absolute;
+    z-index: 2;
+}
+
 #rightHand {
     display: none;
     position: fixed;
@@ -68,9 +116,10 @@ body {
     border-width: 9px;
     height: 64px;
     border-radius: 25%;
-    position: fixed;
-    left: 45%;
-    top: 40%;
+    margin: auto;
+}
+.game {
+    font-size: 2.50rem;
 }
 #Question {
     text-align: center;
@@ -116,7 +165,7 @@ body {
 }
 
 #bodyRows{
-    display: none;
+    opacity: 0;
 }
 
 #startDiv {
@@ -130,9 +179,13 @@ body {
     font-family: Merriweather sans-serif;
     background: black;
     font-weight: bold;
-    padding-bottom: 20px;
+    padding: 20px;
     color: white;
     box-shadow: 3px 5px 10px black;
+}
+
+#startDiv:nth-child() {
+    margin: 0;
 }
 
 #startDiv button {
@@ -141,6 +194,7 @@ body {
     padding: 10px;
     border-radius: 5px;
     font-weight: bolder;
+    border: 2px solid white;
 }
 
 @media screen and (max-width: "600px") {
