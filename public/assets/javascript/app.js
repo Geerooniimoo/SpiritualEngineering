@@ -1,5 +1,4 @@
 
-const moveHands = setInterval(move, 3000);
 $('#startButton').on("click", handleVisit);
 $('.ans').on('click', check);
 
@@ -38,12 +37,19 @@ function changeLevel() {
 	let bg = $('<img>',{class:'bg',src:`assets/images/bg${level}.png`});
 	$('body').prepend(bg);
 	bg.css({top:'-100vh'});
-	$('.bg').animate({top:'+=100vh'},3000);
+	$('.bg').animate({top:'+=100vh'},5000);
 	setTimeout(()=>{
 		$('.bg').eq($('.bg').length-1).remove()
 	},4000);
 	showLevel(level)
-}
+	setInterval(giveOrTake,5000);
+};
+
+function giveOrTake() {
+	lHand.attr('src','assets/images/leftHand4.png')
+	rHand.attr('src','assets/images/rightHand4.png')
+	rHand.css('transform','rotate(-30deg)')
+};
 
 function clock() {
 	mins--;
@@ -89,15 +95,11 @@ function startGame() {
 	updates.lastVisit = new Date;
 	themeSong.play();
 	$("#startDiv").hide();
+	$('.title1').slideUp(1000);
 	changeLevel();
 	setTimeout(()=>{showOpacity('#bodyRows')},4000);
 	showHands();
 	setTimeout(displayQuestions,4000);
-};
-
-function showHands() {
-	$('#leftHand').show(4000);
-	$('#rightHand').show(4000);
 };
 
 function displayQuestions() {
@@ -117,7 +119,6 @@ function nextQuestion() {
 
 function score() {
 	clearInterval(intervalId);
-	clearInterval(moveHands);
 	$('#bodyRows').hide();
 	themeSong.pause();
 	$('#startDiv').hide();
@@ -128,6 +129,7 @@ function score() {
 	$('#scoreBoard').animate({ opacity: 1 }, 2000);
 	setTimeout(() => { $('#scoreBoard').hide() }, 5000);
 
+	move1();
 	// rightAnsTotal > wrongAnsTotal ? move1() : move2();
 
 	// handleUpdates();
@@ -156,18 +158,24 @@ function move1() {
 	// winTrump.play();
 	winBells.play();
 	$('.title1').css('color', 'white');
-	$('#rightHand').attr('src', handRight[3]).show();
-	$('#leftHand').attr('src', handLeft[3]).show();
+	// $('.title1').slideDown(1000);
+
+	rHand.attr('src', handRight[3]).show();
+	lHand.attr('src', handLeft[3]).show();
+
 	setTimeout(() => {
 		winBells.pause()
 		$('#scoreBoard').hide(1000);
 		winSong.play();
 
 		['-=10%','+=20%','-=20%','+=10%']
-			.forEach(hight => $('#rightHand')
+			.forEach(hight => rHand
 			.animate({top:hight},1000));
-
+			changeLevel();
 	}, 10000);
+
+
+	
 	// setTimeout(() => {
 	// 	$('.title1').text('Thank you for playing!');
 	// }, 25000);
@@ -178,23 +186,23 @@ function move2() {
 	lostDoor.play();
 	lostLaugh.play();
 	$('.title1').addClass('font-effect-fire-animation');
-	$('#rightHand').attr('src', handRight[1]);
-	$('#rightHand').animate({ height: '1500px', width: '1500px', top: '0%', left: '-50%' }, 3000);
-	$('#rightHand').promise().done(function () {
-		$('#rightHand').attr('src', handRight[2]);
-		$('#rightHand').animate({ height: '150px', width: '150px', top: '50%', left: '35%' }, 3000);
+	rHand.attr('src', handRight[1]);
+	rHand.animate({ height: '1500px', width: '1500px', top: '0%', left: '-50%' }, 3000);
+	rHand.promise().done(function () {
+		rHand.attr('src', handRight[2]);
+		rHand.animate({ height: '150px', width: '150px', top: '50%', left: '35%' }, 3000);
 		setTimeout(() => {
-			$('#rightHand').animate({ opacity: 0 }, 2000);
+			rHand.animate({ opacity: 0 }, 2000);
 		}, 2500);
 	});
 
-	$('#leftHand').attr('src', handLeft[1]);
-	$('#leftHand').animate({ height: '1500px', width: '1500px', top: '0%', right: '-50%' }, 3000);
-	$('#leftHand').promise().done(function () {
-		$('#leftHand').attr('src', handLeft[2]);
-		$('#leftHand').animate({ height: '150px', width: '150px', top: '50%', right: '35%' }, 3000);
+	lHand.attr('src', handLeft[1]);
+	lHand.animate({ height: '1500px', width: '1500px', top: '0%', right: '-50%' }, 3000);
+	lHand.promise().done(function () {
+		lHand.attr('src', handLeft[2]);
+		lHand.animate({ height: '150px', width: '150px', top: '50%', right: '35%' }, 3000);
 		setTimeout(() => {
-			$('#leftHand').animate({ opacity: 0 }, 2000);
+			lHand.animate({ opacity: 0 }, 2000);
 		}, 2500);
 	});
 	setTimeout(() => {
@@ -228,9 +236,12 @@ function decrement() {
 };
 
 //hands random position
-function move() {
-	$('#rightHand').animate({ top: `${Math.random() * 8 + 26}%`, left: `${Math.random() * 4 + 8}%` }, 3000);
-	$('#leftHand').animate({ top: `${Math.random() * 8 + 26}%`, right: `${Math.random() * 4 + 8}%` }, 3000);
+function showHands() {
+	lHand.show(4000);
+	rHand.show(4000);
+	rHand.animate({ top: `${Math.random() * 8 + 26}%`, left: `${Math.random() * 4 + 8}%` }, 3000);
+	lHand.animate({ top: `${Math.random() * 8 + 26}%`, right: `${Math.random() * 4 + 8}%` }, 3000);
+	handsId = setTimeout(showHands,3000);
 };
 
 function check(event) {

@@ -1,14 +1,17 @@
 let qI = 0;
+let clockId;
+let mins = 0;
+var sound = 0;
+let level = 0;
+let handsId;
+let time = 16;
 let intervalId;
 let correctAns;
-let time = 16;
-let mins = 0;
 let rightAnsTotal = 0;
 let wrongAnsTotal = 0;
-var sound = 0;
-let clockId;
-let level = 0;
-var qAndA = [
+const lHand = $('#leftHand');
+const rHand = $('#rightHand');
+const qAndA = [
 	{
 		question: "What is the spirit?",
 		answers: ["a ghost", "what we become once we die", "what God and the Devil are fighting for", "the nonphysical part of a person"]
