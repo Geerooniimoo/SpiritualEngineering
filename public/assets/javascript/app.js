@@ -26,29 +26,30 @@ async function register() {
 
 async function getSessionId() {
 	let data = await $.ajax(`/api/user/${localStorage.sessionId}`);
-	
+
 	if (!data) return startGame();
 	let hoursFromVisit = (Date.now() - new Date(data.lastVisit)) / 3600000;
-	hoursFromVisit < 24	? reflection(hoursFromVisit) : startGame();
+	hoursFromVisit < 24 ? reflection(hoursFromVisit) : startGame();
 };
 
 function changeLevel() {
 	level++;
-	let bg = $('<img>',{class:'bg',src:`assets/images/bg${level}.png`});
+	let bg = $('<img>', { class: 'bg', src: `assets/images/bg${level}.png` });
 	$('body').prepend(bg);
-	bg.css({top:'-100vh'});
-	$('.bg').animate({top:'+=100vh'},5000);
-	setTimeout(()=>{
-		$('.bg').eq($('.bg').length-1).remove()
-	},4000);
+	bg.css({ top: '-100vh' });
+	$('.bg').animate({ top: '+=100vh' }, 5000);
+	setTimeout(() => {
+		$('.bg').eq($('.bg').length - 1).remove()
+	}, 4000);
 	showLevel(level)
-	setInterval(giveOrTake,5000);
 };
 
 function giveOrTake() {
-	lHand.attr('src','assets/images/leftHand4.png')
-	rHand.attr('src','assets/images/rightHand4.png')
-	rHand.css('transform','rotate(-30deg)')
+	setTimeout(()=>{
+		lHand.attr('src', 'assets/images/leftHand4.png');
+		rHand.attr('src', 'assets/images/rightHand4.png');
+		rHand.css('transform', 'rotate(-30deg)');
+	},7000)
 };
 
 function clock() {
@@ -85,21 +86,22 @@ function clock() {
 
 function showOpacity(str) {
 	let opacity = 0;
-	let	opacityId = setInterval(()=>{
-		document.querySelector(str).style.opacity = opacity; 
-		opacity+=.05; 
-		if(opacity>1)clearInterval(opacityId)},100);
+	let opacityId = setInterval(() => {
+		document.querySelector(str).style.opacity = opacity;
+		opacity += .05;
+		if (opacity > 1) clearInterval(opacityId)
+	}, 100);
 };
 
 function startGame() {
 	updates.lastVisit = new Date;
 	themeSong.play();
 	$("#startDiv").hide();
-	$('.title1').slideUp(1000);
+	$('.title1').hide();
 	changeLevel();
-	setTimeout(()=>{showOpacity('#bodyRows')},4000);
+	setTimeout(() => { showOpacity('#bodyRows') }, 4000);
 	showHands();
-	setTimeout(displayQuestions,4000);
+	setTimeout(displayQuestions, 4000);
 };
 
 function displayQuestions() {
@@ -168,14 +170,14 @@ function move1() {
 		$('#scoreBoard').hide(1000);
 		winSong.play();
 
-		['-=10%','+=20%','-=20%','+=10%']
-			.forEach(hight => rHand
-			.animate({top:hight},1000));
-			changeLevel();
+		['-=10%', '+=20%', '-=20%', '+=10%']
+			.forEach(hight => rHand.animate({ top: hight }, 1000));
+		changeLevel();
+		giveOrTake();
 	}, 10000);
 
 
-	
+
 	// setTimeout(() => {
 	// 	$('.title1').text('Thank you for playing!');
 	// }, 25000);
@@ -241,7 +243,7 @@ function showHands() {
 	rHand.show(4000);
 	rHand.animate({ top: `${Math.random() * 8 + 26}%`, left: `${Math.random() * 4 + 8}%` }, 3000);
 	lHand.animate({ top: `${Math.random() * 8 + 26}%`, right: `${Math.random() * 4 + 8}%` }, 3000);
-	handsId = setTimeout(showHands,3000);
+	handsId = setTimeout(showHands, 3000);
 };
 
 function check(event) {
@@ -260,6 +262,5 @@ function check(event) {
 
 function showLevel(num) {
 	let prompt = document.getElementById('level');
-
 	prompt.innerHTML = `<h4 class='level title1 font-effect-3d'>Level ${num}</h4>`
 }

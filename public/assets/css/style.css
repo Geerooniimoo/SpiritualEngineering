@@ -21,7 +21,7 @@ body {
     position: relative;
     opacity: 0;
     z-index: 1;
-    animation: level 3s;
+    animation: level 7s;
 }
 
 @keyframes level {
