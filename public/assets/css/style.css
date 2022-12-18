@@ -3,10 +3,7 @@
 }
 
 body {
-    /* background-repeat: no-repeat;
-    background-size: 100% 100%;
-    background-image: url(/assets/images/background1.png);
-    background-size: 100% 100vh; */
+    height: 100vh;
     background: #000;
     position: relative;
     margin: 0;
@@ -105,24 +102,11 @@ main {
     left: 30%;
     top: 35%;
 }
-#timer {
-    text-align: center;
-    color: brown;
-    font-size: 50px;
-    width: 80px;
-    background-color: black;
-    border: solid;
-    border-color: firebrick;
-    border-width: 9px;
-    height: 64px;
-    border-radius: 25%;
-    position: relative;
-    top: -20vh;
-    margin: auto;
-}
-.game {
+
+Z.game {
     font-size: 2.50rem;
 }
+
 #Question {
     text-align: center;
     font-size: 30px;
@@ -175,7 +159,7 @@ main {
     border: 1px solid darkgrey;
     border-radius: 25px;
     text-align: center;
-    width: 27rem;
+    width: 30rem;
     margin: 0 auto;
     font-size: 1.5rem;
     font-family: Merriweather sans-serif;

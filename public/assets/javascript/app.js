@@ -48,7 +48,6 @@ function giveOrTake() {
 	setTimeout(()=>{
 		lHand.attr('src', 'assets/images/leftHand4.png');
 		rHand.attr('src', 'assets/images/rightHand4.png');
-		rHand.css('transform', 'rotate(-30deg)');
 	},7000)
 };
 
