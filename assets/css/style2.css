@@ -1,0 +1,253 @@
+/* * {
+    border: 2px solid red;
+} */
+
+body {
+    /* background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-image: url(/assets/images/background1.png);
+    background-size: 100% 100vh; */
+    background: #000;
+    position: relative;
+    margin: 0;
+    padding: 0;
+}
+#title {
+    height: 203px;
+    margin-top: 5vh;
+    width: 100%;
+}
+.level {
+    position: relative;
+    opacity: 0;
+    z-index: 1;
+    animation: level 7s;
+}
+
+@keyframes level {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 1;
+        transform:scale(200%);
+    }
+    100% {
+        transform:scale(200%);
+        opacity: 0;
+    }
+}
+.title1 {
+    text-align: center;
+	font-size: 5rem;
+    color: darkred;
+    line-height: 1;
+    font-family: Merriweather;
+}
+.clockP {
+    font-family: Merriweather;
+    color: black;
+    text-shadow: 0 0 10px brown;
+    margin: 0 10px;
+}
+#hands {
+    height: 153px;
+}
+#leftHand {
+    display: none;
+    position: fixed;
+    right: 10%;
+    top: 20%;
+    width: 150px;
+    height: 150px;
+    z-index: 2;
+}
+
+.bg {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 105%;
+    top: -10px;
+    left: -10px;
+    position: fixed;
+    z-index: 1;
+}
+
+main {
+    width: 100%;
+    position: absolute;
+    z-index: 2;
+}
+
+#rightHand {
+    display: none;
+    position: fixed;
+    left: 10%;
+    top: 20%;
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    z-index: 2;
+}
+#scoreBoard {
+    display: none;
+    color: white;
+    background-color: black;
+    border: solid;
+    border-color: brown;
+    border-radius: 12px;
+    font-size: 20px;
+    width: 38%;
+    text-align: center;
+    height: 140px;
+    position: fixed;
+    left: 30%;
+    top: 35%;
+}
+#timer {
+    text-align: center;
+    color: brown;
+    font-size: 50px;
+    width: 80px;
+    background-color: black;
+    border: solid;
+    border-color: firebrick;
+    border-width: 9px;
+    height: 64px;
+    border-radius: 25%;
+    position: relative;
+    top: -20vh;
+    margin: auto;
+}
+.game {
+    font-size: 2.50rem;
+}
+#Question {
+    text-align: center;
+    font-size: 30px;
+    color: brown;
+    font-weight: 900;
+    background-color: black;
+    border-radius: 12px;
+    border-color: brown;
+    border: solid;
+    border-width: .5px;
+    position: fixed;
+    left: 3%;
+    bottom: 33%;
+    width: 95%;
+    z-index: 1;
+}
+#answers {
+    position: fixed;
+    left: 15%;
+    bottom: 1%;
+    background-color: black;
+    border-radius: 12px;
+    border: solid;
+    border-width: 1px;
+    width: 70%;
+    height: fit-content;
+    bottom: 5%;
+}
+.ans:hover {
+    color: sandybrown;
+    cursor: -webkit-grab;
+}
+.ans {
+    line-height: 1;
+    color: brown;
+    font-style: oblique;
+    font-weight: bold;
+    font-size: 20px;
+}
+.reward {
+    margin: 5%;
+}
+
+#bodyRows{
+    opacity: 0;
+}
+
+#startDiv {
+    position: relative;
+    border: 1px solid darkgrey;
+    border-radius: 25px;
+    text-align: center;
+    width: 27rem;
+    margin: 0 auto;
+    font-size: 1.5rem;
+    font-family: Merriweather sans-serif;
+    background: black;
+    font-weight: bold;
+    padding: 20px;
+    color: white;
+    box-shadow: 3px 5px 10px black;
+}
+
+#startDiv:nth-child() {
+    margin: 0;
+}
+
+#startDiv button {
+    background: black;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: bolder;
+    border: 2px solid white;
+}
+
+@media screen and (max-width: "600px") {
+    #title {
+        font-size: 7rem;
+    }
+    #startDiv {
+        width: 24rem;
+        font-size: 3.5rem;
+    }
+
+    #startDiv button {
+        padding: 27px;
+        font-size: 3rem;
+        bottom: 20%;
+    }
+}
+
+.spiritGrab {
+    animation: spiritGrab 2s cubic-bezier(0,1,1,0);
+}
+
+@keyframes spiritGrab {
+    0% {
+        background-image: url("../images/leftHand0.png");
+        transform: scale(1.0);
+        
+    }
+    25% {
+        transform: scale(1.40);
+    }
+    /* 25.5% {
+        transform: scale(1.40);
+    } */
+    50% {
+        transform: scale(1.80);
+    }
+    /* 50.5% {
+        transform: scale(1.60);
+    } */
+    75% {
+        transform: scale(2.60);
+    }
+    /* 75.5% {
+        transform: scale(1.80);
+    } */
+    99.5% {
+        transform: scale(5.20);
+    }
+    /* 100% {
+        transform: scale(2);
+    } */
+}
+
