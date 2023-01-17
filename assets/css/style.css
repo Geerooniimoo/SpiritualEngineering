@@ -19,19 +19,177 @@ body {
     height: 100vh;
 }
 
+#leftHand {
+    position: absolute;
+    z-index: 1;
+    opacity: 0;
+    top: 30%;
+    right: 20%;
+    width: 11%;
+    /* animation: leftHand2 25s 1s infinite ease-in-out; */
+}
+
+@keyframes leftHand1 {
+    0% {
+        opacity: .1;
+        top: 25%;
+        right: 35%;
+        width: 1%;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes leftHand2 {
+    0% {
+        opacity: 1;
+    }
+    
+    12.5% {
+        top: 25%;
+    }
+    
+    25% {
+        right: 15%;
+    }
+    
+    37.5% {
+        top: 35%;
+    }
+    
+    50% {
+        scale: 1.5;
+        right: 20%;
+    }
+    
+    67.5% {
+        top: 25%;
+    }
+    
+    75% {
+        right: 25%;
+        scale: 1.5
+    }
+    
+    87.5% {
+        top: 35%;
+    }
+    
+    100% {
+        opacity: 1;
+    }
+}
+
+#rightHand {
+    position: absolute;
+    z-index: 1;
+    opacity: 0;
+    top: 30%;
+    left: 20%;
+    width: 10%;
+    /* animation: rightHand2 30s infinite ease-in-out; */
+}
+
+@keyframes rightHand1 {
+    0% {
+        opacity: .1;
+        top: 25%;
+        left: 35%;
+        width: 1%;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes rightHand2 {
+    0% {
+        opacity: 1;
+    }
+    
+    12.5% {
+        top: 25%;
+        scale: 1.5;
+    }
+    
+    25% {
+        left: 15%;
+    }
+    
+    37.5% {
+        top: 35%;
+    }
+    
+    50% {
+        left: 20%;
+        scale: 1;
+    }
+    
+    67.5% {
+        top: 25%;
+    }
+    
+    75% {
+        left: 25%;
+    }
+    
+    87.5% {
+        scale: 1.5;
+        top: 35%;
+    }
+    
+    100% {
+        opacity: 1;
+    }
+}
+
+
 main {
-    color: white;
-    position: fixed;
-    height: 30vh;
-    width: 60%;
-    background: #000;
-    z-index: 2;
-    border: 4px solid teal;
-    top: 0;
-    bottom: 0;
+    width: 90%;
+    margin: 0 auto;
+    position: absolute;
+    top: 35%;
     left: 0;
     right: 0;
-    margin: auto;
+    height: 55vh;
+    overflow: scroll;
+}
+
+main::-webkit-scrollbar {
+    display: none;
+}
+
+main h1 {
+    margin: 15px auto;
+}
+
+.question {
+    font-size: 4rem;
+    color: #575b6d;
+    letter-spacing: .4rem;
+}
+
+#answersDiv {
+    width: 50%;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 40px auto;
+}
+
+#answersDiv button {
+    width: 100%;
+    /* height: 50px; */
+    font-size: 2rem;
+    text-align: left;
+    border-radius: 20px;
+    margin: 5px auto;
+    color: #575b6d;
+    /* color: #931426; */
+    padding: 0 30px 10px;
+    background: black;
 }
 
 #startBtn {
