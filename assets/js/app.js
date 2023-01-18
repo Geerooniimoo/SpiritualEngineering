@@ -55,12 +55,11 @@ const renderQA = () => {
         );
         time--;
         clock.innerText = time;
-    }, 1000)
+    }, 200)
 
-    A.sort(() => .5 * Math.random()).forEach(ans => {
+    A.sort(() => .5 - Math.random()).forEach(ans => {
         answersDiv.innerHTML += `<button onclick="hanAns()">${ans}</button>`
     });
-
 };
 
 const startGame = () => {
@@ -75,11 +74,11 @@ const startGame = () => {
     setTimeout(()=>{
 //move        leftHand.style.animation = "leftHand2 30s 1s infinite ease-in-out"
         leftHand.style.animation = "leftHand2 5s 1s infinite ease-in-out"
-    },15000);
+    },5000);
     setTimeout(()=>{
 //move        rightHand.style.animation = "rightHand2 40s infinite ease-in-out"
         rightHand.style.animation = "rightHand2 5s infinite ease-in-out"
-    },15000);
+    },5000);
     /* animation: leftHand2 25s 1s infinite ease-in-out; */
     /* animation: rightHand2 30s infinite ease-in-out; */
 
@@ -87,7 +86,8 @@ const startGame = () => {
     
 }
 
- startGame();
+startGame();
+ setInterval(startGame,15000);
 
 startBtn.addEventListener('click', startGame);
 
