@@ -1,6 +1,11 @@
+* {
+    border: 2px dotted red;
+}
+
 body {
     background: black;
     text-align: center;
+    overflow: hidden;
     padding: 0;
     margin: 0;
 }
@@ -15,6 +20,7 @@ body {
 }
 
 #img {
+    position: relative;
     width: 100vw;
     height: 100vh;
 }
@@ -23,7 +29,7 @@ body {
     position: absolute;
     z-index: 1;
     opacity: 0;
-    top: 30%;
+    top: 25%;
     right: 20%;
     width: 11%;
     /* animation: leftHand2 25s 1s infinite ease-in-out; */
@@ -32,7 +38,7 @@ body {
 @keyframes leftHand1 {
     0% {
         opacity: .1;
-        top: 25%;
+        top: 20%;
         right: 35%;
         width: 1%;
     }
@@ -48,7 +54,7 @@ body {
     }
     
     12.5% {
-        top: 25%;
+        top: 20%;
     }
     
     25% {
@@ -56,7 +62,7 @@ body {
     }
     
     37.5% {
-        top: 35%;
+        top: 30%;
     }
     
     50% {
@@ -65,7 +71,7 @@ body {
     }
     
     67.5% {
-        top: 25%;
+        top: 20%;
     }
     
     75% {
@@ -74,7 +80,7 @@ body {
     }
     
     87.5% {
-        top: 35%;
+        top: 30%;
     }
     
     100% {
@@ -86,7 +92,7 @@ body {
     position: absolute;
     z-index: 1;
     opacity: 0;
-    top: 30%;
+    top: 25%;
     left: 20%;
     width: 10%;
     /* animation: rightHand2 30s infinite ease-in-out; */
@@ -95,7 +101,7 @@ body {
 @keyframes rightHand1 {
     0% {
         opacity: .1;
-        top: 25%;
+        top: 20%;
         left: 35%;
         width: 1%;
     }
@@ -111,7 +117,7 @@ body {
     }
     
     12.5% {
-        top: 25%;
+        top: 20%;
         scale: 1.5;
     }
     
@@ -120,7 +126,7 @@ body {
     }
     
     37.5% {
-        top: 35%;
+        top: 30%;
     }
     
     50% {
@@ -129,7 +135,7 @@ body {
     }
     
     67.5% {
-        top: 25%;
+        top: 20%;
     }
     
     75% {
@@ -138,7 +144,7 @@ body {
     
     87.5% {
         scale: 1.5;
-        top: 35%;
+        top: 30%;
     }
     
     100% {
@@ -151,10 +157,11 @@ main {
     width: 90%;
     margin: 0 auto;
     position: absolute;
-    top: 35%;
+    bottom: 0;
+    border: 2px dotted red;
     left: 0;
     right: 0;
-    height: 55vh;
+    height: 50vh;
     overflow: scroll;
 }
 
@@ -176,7 +183,7 @@ main h1 {
     width: 50%;
     display: flex;
     flex-wrap: wrap;
-    margin: 40px auto;
+    margin: 10px auto;
 }
 
 #answersDiv button {
@@ -216,4 +223,66 @@ main h1 {
 #donate img {
     width: 180px;
     opacity: .75;
+}
+
+@media screen and (max-width:1200px) and (min-height:1000px) {
+    main {
+        height: 55vh;
+    }
+
+    .question {
+        font-size: 3.5rem;
+    letter-spacing: .2rem;
+    }
+
+    #answersDiv {
+        width: 65%;
+    }   
+
+    #donate {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+    }
+}
+
+@media screen and (max-width:1000px) and (min-height:1500px) {
+
+    #title {
+        position: absolute;
+        z-index: 100;
+    }
+
+    #leftHand, #rightHand {
+        width: 25%;
+    }
+
+    main {
+        width: 95%;
+    }    
+
+    .question {
+        font-size: 6rem;
+    }
+
+    #answersDiv {
+        width: 100%;
+    }
+
+    #answersDiv button {
+        font-size: 3.5rem;
+    }
+
+    #img {
+        width: 2000px;
+        height: 2700px;
+        margin-top: 0;
+        left: calc(50% - 950px);
+    }
+
+    #donate {
+        bottom: 0;
+        right: 0;
+    }
+        
 }

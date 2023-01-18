@@ -15,13 +15,11 @@ theme.src = './assets/sounds/Halo Theme Song Original.mp3';
 const hanAns = () =>
     this.addEventListener('click', ({ target: { innerText: answer } }) => {
         answer == questions[qI].C ? (
-            correct++,
-            win.play(),
-            console.log(correct)
+            correct++
+//sound             win.play(),
         ) : (
-            chances--,
-            lose.play(),
-            console.log(chances)
+            chances--
+//sound             lose.play(),
         );
         qI++;
         renderQA();
@@ -37,7 +35,8 @@ const endGame = () => {
 }
 
 const renderQA = () => {
-    let time = 3;
+    let time = 0;
+    if (qI == questions.length ) qI=0; //remove
     if (qI == questions.length || !chances) return endGame();
     let { Q, A } = questions[qI];
 
@@ -51,7 +50,7 @@ const renderQA = () => {
     clockId = setInterval(() => {
         if (!time) return (
             qI++,
-            lose.play(),
+//sound             lose.play(),
             renderQA()
         );
         time--;
@@ -65,17 +64,21 @@ const renderQA = () => {
 };
 
 const startGame = () => {
-    theme.play();
+//sound     theme.play();
     startBtn.style.display = "none";
-    leftHand.style.animation = "leftHand1 15s";
-    rightHand.style.animation = "rightHand1 15s";
+//move    leftHand.style.animation = "leftHand1 15s";
+    leftHand.style.animation = "leftHand1 5s"; //remove
+//move      rightHand.style.animation = "rightHand1 15s";
+    rightHand.style.animation = "rightHand1 5s"; //remove
     leftHand.style.opacity =  1;
     rightHand.style.opacity = 1;
     setTimeout(()=>{
-        leftHand.style.animation = "leftHand2 25s 1s infinite ease-in-out"
+//move        leftHand.style.animation = "leftHand2 30s 1s infinite ease-in-out"
+        leftHand.style.animation = "leftHand2 5s 1s infinite ease-in-out"
     },15000);
     setTimeout(()=>{
-        rightHand.style.animation = "rightHand2 30s infinite ease-in-out"
+//move        rightHand.style.animation = "rightHand2 40s infinite ease-in-out"
+        rightHand.style.animation = "rightHand2 5s infinite ease-in-out"
     },15000);
     /* animation: leftHand2 25s 1s infinite ease-in-out; */
     /* animation: rightHand2 30s infinite ease-in-out; */
@@ -84,6 +87,8 @@ const startGame = () => {
     
 }
 
-// startGame();
+ startGame();
 
 startBtn.addEventListener('click', startGame);
+
+renderQA()
