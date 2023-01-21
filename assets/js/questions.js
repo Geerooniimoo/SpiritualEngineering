@@ -1,11 +1,6 @@
 
 let questions = [
 	{
-		Q: "What is the spirit?",
-		A: ["a ghost", "what we become once we die", "what God and the Devil are fighting for", "the nonphysical part of a person"],
-		C: "the nonphysical part of a person"
-	},
-	{
 		Q: "What is God if it's not defined by religion?",
 		A: ["Jesus", "nothing", "Allah", "the universe"],
 		C: "the universe"

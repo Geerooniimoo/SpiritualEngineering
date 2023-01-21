@@ -25,6 +25,15 @@ body {
     letter-spacing: 2rem;
 }
 
+.warning {
+    font-size: 3rem;
+    color: yellow;
+    background: #000;
+    padding: 20px;
+    width: fit-content;
+    border-radius: 12px;
+}
+
 #imgDiv {
     width: 100vw;
     height: 100vh;
@@ -124,6 +133,72 @@ body {
     }
 }
 
+@keyframes leftHand3 {
+    0% {
+        opacity: 1;
+    }
+
+    40% {
+        right: 10%;
+        top: 15%;
+    }
+
+    45% {
+        right: 70%;
+        top: 60%;
+    }
+    
+    60% {
+        right: 70%;
+        top: 60%;
+    }
+
+    100% {
+        opacity: 1;
+    }
+    
+}
+
+@keyframes leftHand4 {
+    0% {
+        opacity: 1;
+    }
+
+    20% {
+        transform: scale(1);
+        right: 10%;
+        top: 10%;
+    }
+    
+    30% {
+        opacity: 1;
+        top: 50%;
+        right: 20%;
+        transform: scale(4);
+    }
+    
+    31% {
+        opacity: 0;
+    }
+    
+    60% {
+        opacity: 0;
+    }
+    
+    61% {
+        opacity: 1;
+        top: 50%;
+        right: 20%;
+        transform: scale(4);
+    }
+    
+    100% {
+        top: 51%;
+        right: 45%;
+        transform: scale(0);
+    }
+}
+
 #rightHand {
     position: absolute;
     z-index: 2;
@@ -211,17 +286,69 @@ body {
 }
 
 @keyframes rightHand3 {
-    5% {
+    0% {
+        opacity: 1;
+    }
+
+    40% {
+        left: 10%;
+        top: 15%;
+    }
+
+    45% {
         left: 70%;
         top: 60%;
     }
-
-    50% {
-        left: 70%;
-        top: 60%;
-    }
-
     
+    60% {
+        left: 70%;
+        top: 60%;
+    }
+
+    100% {
+        opacity: 1;
+    }
+    
+}
+
+@keyframes rightHand4 {
+    0% {
+        opacity: 1;
+    }
+
+    20% {
+        transform: scale(1);
+        left: 10%;
+        top: 10%;
+    }
+    
+    30% {
+        opacity: 1;
+        top: 50%;
+        left: 20%;
+        transform: scale(4);
+    }
+    
+    31% {
+        opacity: 0;
+    }
+    
+    60% {
+        opacity: 0;
+    }
+    
+    61% {
+        opacity: 1;
+        top: 50%;
+        left: 20%;
+        transform: scale(4);
+    }
+    
+    100% {
+        top: 50%;
+        left: 45%;
+        transform: scale(0);
+    }
 }
 
 
@@ -239,16 +366,7 @@ main {
 @keyframes main {
     0% {
         opacity: 0;
-        transform: skew(20deg, 20deg) scaleX(1.5);
-    }
-    20% {
-        transform: skew(-15deg, -15deg) scaleX(1);
-    }
-    50% {
-        transform: skew(10deg, 10deg) scaleX(1);
-    }
-    75% {
-        transform: skew(-5deg, -5deg) scaleX(1);
+        transform: skew(20deg, 20deg) scaleX(2);
     }
 }
 
@@ -261,7 +379,7 @@ main h1 {
 }
 
 #clock {
-    animation: clock 10s;
+    font-size: 5rem;
 }
 
 @keyframes clock {
@@ -312,6 +430,58 @@ main h1 {
     30% {
         scale: .8;
     }
+
+}
+
+@keyframes clock2 {
+    
+    0% {
+        filter:invert(1);
+    }
+    
+    10% {
+        filter:invert(0.5);
+    }
+    
+    20% {
+        filter:invert(1);
+    }
+    
+    30% {
+        filter:invert(0.5);
+    }
+    
+    40% {
+        filter:invert(1);
+    }
+    
+    50% {
+        filter:invert(0.5);
+    }
+    
+    60% {
+        filter:invert(1);
+    }
+    
+    70% {
+        filter:invert(0);
+    }
+
+    80% {
+        transform: translate3d(-1px, 0, 0);
+      }
+      
+    85% {
+        transform: translate3d(2px, 0, 0);
+      }
+    
+    90% {
+        transform: translate3d(-4px, 0, 0);
+      }
+    
+    95% {
+        transform: translate3d(4px, 0, 0);
+      }
 
 }
 
@@ -375,16 +545,10 @@ button:hover {
 @keyframes startBtn {
     25% {
         opacity: 1;
-        transform: scaleX(1.5) skew(-10deg, -20deg);
     }
-    
-    70% {
-        transform: scaleX(1.75) skew(10deg, 20deg);
-    }
-    
     
     100% {
-        transform: scaleX(2) skew(10deg, 20deg);
+        transform: scaleX(2) skew(-100deg, -100deg);
         opacity: 0;
     }
 }
