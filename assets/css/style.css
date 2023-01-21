@@ -1,6 +1,3 @@
-* {
-    border: 2px dotted red;
-}
 
 :root {
     --y: 25%;
@@ -39,6 +36,7 @@ body {
     position: absolute;
     width: 100vw;
     height: 100vh;
+    left: 0;
 }
 
 #leftHand {
@@ -59,8 +57,30 @@ body {
         width: 1%;
     }
 
-    100% {
+    20% {
+        top: var(--y);
+        right: var(--x);
+        rotate: 0deg;
+        width: 11%;
+    }
+
+    50% {
         opacity: 1;
+        top: 55%;
+        right: 40%;
+        rotate: 110deg;
+        scale: 1;
+    }
+    
+    70% {
+        scale: 1.5;
+        right: 38%;
+    }
+    71% {
+        scale: 1.5;
+        top: 55%;
+        right: 38%;
+        rotate: 110deg;
     }
 }
 
@@ -111,7 +131,6 @@ body {
     top: var(--y);
     left: 20%;
     width: 10%;
-    /* animation: rightHand2 30s infinite ease-in-out; */
 }
 
 @keyframes rightHand1 {
@@ -122,8 +141,31 @@ body {
         width: 1%;
     }
 
-    100% {
+    20% {
+        top: var(--y);
+        left: var(--x);
+        rotate: 0deg;
+        width: 10%;
+    }
+
+    50% {
         opacity: 1;
+        top: 55%;
+        left: 40%;
+        rotate: -110deg;
+        width: 10%;
+        scale: 1;
+    }
+
+    70% {
+        scale: 1.5;
+        left: 37%;
+    }
+    71% {
+        scale: 1.5;
+        top: 55%;
+        left: 37%;
+        rotate: -110deg;
     }
 }
 
@@ -168,17 +210,46 @@ body {
     }
 }
 
+@keyframes rightHand3 {
+    5% {
+        left: 70%;
+        top: 60%;
+    }
+
+    50% {
+        left: 70%;
+        top: 60%;
+    }
+
+    
+}
+
 
 main {
     width: 90%;
     margin: 0 auto;
     position: absolute;
     bottom: 0;
-    border: 2px dotted red;
     left: 0;
     right: 0;
     height: 50vh;
     overflow: scroll;
+}
+
+@keyframes main {
+    0% {
+        opacity: 0;
+        transform: skew(20deg, 20deg) scaleX(1.5);
+    }
+    20% {
+        transform: skew(-15deg, -15deg) scaleX(1);
+    }
+    50% {
+        transform: skew(10deg, 10deg) scaleX(1);
+    }
+    75% {
+        transform: skew(-5deg, -5deg) scaleX(1);
+    }
 }
 
 main::-webkit-scrollbar {
@@ -187,6 +258,61 @@ main::-webkit-scrollbar {
 
 main h1 {
     margin: 15px auto;
+}
+
+#clock {
+    animation: clock 10s;
+}
+
+@keyframes clock {
+    0% {
+        opacity: 0;
+        scale: .01;
+        rotate: -10000deg;
+    }
+    
+    20% {
+        opacity: 1;
+        scale: .8;
+        rotate: 0deg;
+    }
+    
+    21% {
+        filter:invert(1);
+    }
+    
+    22% {
+        filter:invert(0.5);
+    }
+    
+    23% {
+        filter:invert(1);
+    }
+    
+    24% {
+        filter:invert(0.5);
+    }
+    
+    25% {
+        filter:invert(1);
+    }
+    
+    26% {
+        filter:invert(0.5);
+    }
+    
+    27% {
+        filter:invert(1);
+    }
+    
+    28% {
+        filter:invert(0);
+    }
+
+    30% {
+        scale: .8;
+    }
+
 }
 
 .question {
@@ -200,6 +326,22 @@ main h1 {
     display: flex;
     flex-wrap: wrap;
     margin: 10px auto;
+    animation: answersDiv 2s;
+}
+
+@keyframes answersDiv {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+
+button:hover {
+    cursor: pointer;
 }
 
 #answersDiv button {
@@ -228,6 +370,23 @@ main h1 {
     font-size: 3rem;
     border: 4px solid #484848;
     box-shadow: 5px 5px 5px black;
+}
+
+@keyframes startBtn {
+    25% {
+        opacity: 1;
+        transform: scaleX(1.5) skew(-10deg, -20deg);
+    }
+    
+    70% {
+        transform: scaleX(1.75) skew(10deg, 20deg);
+    }
+    
+    
+    100% {
+        transform: scaleX(2) skew(10deg, 20deg);
+        opacity: 0;
+    }
 }
 
 #donate {
@@ -261,8 +420,8 @@ main h1 {
 
     #answersDiv {
         width: 65%;
-    }   
-
+    }
+    
     #answersDiv button {
         font-size: 1.2rem;
     }

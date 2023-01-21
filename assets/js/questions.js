@@ -62,14 +62,14 @@ let questions = [
 	},
 	{
 		Q: "What is the spirit?",
-		A: ["A ghost","A creation of religion","The after life","the universe's intellectual begining"],
-		C: "the universe's intellectual begining"
+		A: ["A ghost","A creation of religion","The after life","A universe's intellectual begining"],
+		C: "A universe's intellectual begining"
 	},
-	{
-		Q: "Does the universal space have a limit?",
-		A: ["Yes, everything does.","No, because the Bible says so.","Yes, everything that has a begining, most have an end.","No, because if it did, what came next would still be part of it."],
-		C: "No, because if it did, what came next would still be part of it."
-	},
+	// {
+	// 	Q: "Does the universal space have a limit?",
+	// 	A: ["Yes, everything does.","No, because the Bible says so.","Yes, everything that has a begining, most have an end.","No, because if it did, what came next would still be part of it."],
+	// 	C: "No, because if it did, what came next would still be part of it."
+	// },
 	{
 		Q: "Does absolute emptiness exist?",
 		A: ["Yes, when God is not present.","No, air will remain.","Yes, when nothing can be seen.","No, what seems empty is occupied by matter which escapes current instruments."],

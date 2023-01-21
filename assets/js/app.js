@@ -1,5 +1,6 @@
 let qI = 0;
 let clockId;
+let time = 60;
 let correct = 0;
 let chances = 3;
 
@@ -15,11 +16,18 @@ theme.src = './assets/sounds/Halo Theme Song Original.mp3';
 const hanAns = () =>
     this.addEventListener('click', ({ target: { innerText: answer } }) => {
         answer == questions[qI].C ? (
-            correct++
-//sound             win.play(),
+            correct++,
+             win.play()
         ) : (
-            chances--
-//sound             lose.play(),
+            chances--,
+            lose.play(),
+            chances == 2 ? (
+                setTimeout(()=>{rightHand.style.animation = 'rightHand3 5s infinite'},300),
+                setTimeout(()=>{rightHand.style.animation = "rightHand2 40s infinite ease-in-out"},5000)
+                ): (
+                setTimeout(()=>{rightHand.style.animation = 'rightHand3 5s infinite'},300),
+                setTimeout(()=>{rightHand.style.animation = "rightHand2 40s infinite ease-in-out"},5000)
+            )
         );
         qI++;
         renderQA();
@@ -27,7 +35,7 @@ const hanAns = () =>
 
 const endGame = () => {
     clearInterval(clockId);
-    if(!chances) fail.play();
+    if (!chances) fail.play();
 
     main.innerHTML = `
         <h1 class="end question font-effect-3d">Score: ${Math.floor(correct / 7 * 100)} %</h1>
@@ -35,8 +43,6 @@ const endGame = () => {
 }
 
 const renderQA = () => {
-    let time = 0;
-    if (qI == questions.length ) qI=0; //remove
     if (qI == questions.length || !chances) return endGame();
     let { Q, A } = questions[qI];
 
@@ -50,12 +56,12 @@ const renderQA = () => {
     clockId = setInterval(() => {
         if (!time) return (
             qI++,
-//sound             lose.play(),
-            renderQA()
+             lose.play(),
+            endGame()
         );
         time--;
         clock.innerText = time;
-    }, 200)
+    }, 1000)
 
     A.sort(() => .5 - Math.random()).forEach(ans => {
         answersDiv.innerHTML += `<button onclick="hanAns()">${ans}</button>`
@@ -63,32 +69,37 @@ const renderQA = () => {
 };
 
 const startGame = () => {
-//sound     theme.play();
-    startBtn.style.display = "none";
-//move    leftHand.style.animation = "leftHand1 15s";
-    leftHand.style.animation = "leftHand1 5s"; //remove
-//move      rightHand.style.animation = "rightHand1 15s";
-    rightHand.style.animation = "rightHand1 5s"; //remove
-    leftHand.style.opacity =  1;
-    rightHand.style.opacity = 1;
-    setTimeout(()=>{
-//move        leftHand.style.animation = "leftHand2 30s 1s infinite ease-in-out"
-        leftHand.style.animation = "leftHand2 5s 1s infinite ease-in-out"
-    },5000);
-    setTimeout(()=>{
-//move        rightHand.style.animation = "rightHand2 40s infinite ease-in-out"
-        rightHand.style.animation = "rightHand2 5s infinite ease-in-out"
-    },5000);
-    /* animation: leftHand2 25s 1s infinite ease-in-out; */
-    /* animation: rightHand2 30s infinite ease-in-out; */
+    theme.play();
+    startBtn.style.animation = "startBtn 5s";
+    setTimeout(()=>{startBtn.style.display = 'none';},5000);
 
-    setTimeout(renderQA,32000);
+    setTimeout(()=>{main.innerHTML = `
+    <h1 class="question font-effect-3d" id="clock">⌚:60</h1>`},9000);
+
+    leftHand.style.animation = "leftHand1 25s";
+    rightHand.style.animation = "rightHand1 25s";
+    leftHand.style.opacity = 1;
+    rightHand.style.opacity = 1;
+
+    setTimeout(()=>{
+        leftHand.style.animation = "leftHand2 30s 1s infinite ease-in-out"
+    },34000);
+    setTimeout(()=>{
+        rightHand.style.animation = "rightHand2 40s infinite ease-in-out"
+    },34000);
+
+    setTimeout(() => {
+        main.style.animation = 'main 4s';
+        if (qI == questions.length || !chances) return endGame();
+        let { Q, A } = questions[qI];
     
+        main.innerHTML = `
+        <h1 class="question font-effect-3d"> :<span id="clock">${time}</span></h1>
+        <h1 class="question font-effect-3d"> ${questions[qI].Q} </h1>
+        <div id="answersDiv"></div>
+        `;
+        setTimeout(renderQA,8000);
+    }, 25000)
 }
 
-startGame();
- setInterval(startGame,15000);
-
 startBtn.addEventListener('click', startGame);
-
-renderQA()
