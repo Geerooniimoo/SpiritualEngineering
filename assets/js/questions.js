@@ -36,7 +36,7 @@ let questions = [
 		C: "Suprime intelligence"
 	},
 	{
-		Q: "What is the meaning of life?",
+		Q: "What is the purpose of life?",
 		A: ["to discover the creator", "to focus on spiritual growth and serive to humanity", "to seek devine salvation through the grace of God", "to resolve the imbalance of the mind by understanding the nature of reality"],
 		C: "to resolve the imbalance of the mind by understanding the nature of reality"
 	},

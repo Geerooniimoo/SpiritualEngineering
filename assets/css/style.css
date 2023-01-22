@@ -32,6 +32,7 @@ body {
     padding: 20px;
     width: fit-content;
     border-radius: 12px;
+    opacity: .5;
 }
 
 #imgDiv {
