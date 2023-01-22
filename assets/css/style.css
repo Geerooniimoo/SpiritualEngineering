@@ -15,7 +15,7 @@ body {
     margin: 0;
 }
 
-.title1 {
+#title {
     font-size: 5rem;
     position: absolute;
     z-index: 1;
