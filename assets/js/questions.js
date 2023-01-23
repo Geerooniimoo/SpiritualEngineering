@@ -57,7 +57,7 @@ let questions = [
 	},
 	{
 		Q: "What is the spirit?",
-		A: ["A ghost","A creation of religion","The after life","A universe's intellectual begining"],
+		A: ["A ghost","A creation of religion","A being from the after life","A universe's intellectual begining"],
 		C: "A universe's intellectual begining"
 	},
 	// {
