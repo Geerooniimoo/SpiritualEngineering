@@ -7,7 +7,7 @@
 body {
     background: black;
     text-align: center;
-    position: absolute;
+    position: fixed;
     overflow: hidden;
     height: 100vh;
     width: 100vw;
@@ -71,7 +71,7 @@ body {
     opacity: 0;
     top: var(--y);
     right: var(--x);
-    width: 11%;
+    width: 10%;
     /* animation: leftHand2 25s 1s infinite ease-in-out; */
 }
 
@@ -367,7 +367,6 @@ body {
         transform: scale(0);
     }
 }
-
 
 main {
     width: 90%;
@@ -694,7 +693,7 @@ button:hover {
     }
     
     #leftHand, #rightHand {
-        width: 20%;
+        width: 25%;
     }
 
     main {
@@ -723,6 +722,71 @@ button:hover {
         bottom: 0;
         right: 0;
     }
+
+    @keyframes leftHand1 {
+        0% {
+            opacity: .1;
+            top: calc(var(--y) - 5%);
+            right: calc(var(--x) + 15%);
+            width: 1%;
+        }
+    
+        20% {
+            top: var(--y);
+            right: var(--x);
+            rotate: 0deg;
+            width: 10%;
+        }
+    
+        50% {
+            opacity: 1;
+            top: 65%;
+            right: 40%;
+            rotate: 110deg;
+            width: 10%;
+            scale: 1;
+        }
+        
+        71% {
+            scale: 1.5;
+            top: 65%;
+            right: 25%;
+            rotate: 110deg;
+        }
+    }
+    
+    @keyframes rightHand1 {
+        0% {
+            opacity: .1;
+            top: calc(var(--y) - 5%);
+            left: calc(var(--x) + 15%);
+            width: 1%;
+        }
+    
+        20% {
+            top: var(--y);
+            left: var(--x);
+            rotate: 0deg;
+            width: 10%;
+        }
+    
+        50% {
+            opacity: 1;
+            top: 65%;
+            left: 40%;
+            rotate: -110deg;
+            width: 10%;
+            scale: 1;
+        }
+    
+        71% {
+            scale: 1.5;
+            top: 65%;
+            left: 25%;
+            rotate: -110deg;
+        }
+    }
+ 
         
 }
 
@@ -734,7 +798,7 @@ button:hover {
     }
     
     #leftHand, #rightHand {
-        width: 13%;
+        width: 15%;
     }
 
     main {
@@ -767,7 +831,79 @@ button:hover {
     #donate img {
         width: 120px;
     }
+
+    @keyframes leftHand1 {
+        0% {
+            opacity: .1;
+            top: calc(var(--y) - 5%);
+            right: calc(var(--x) + 15%);
+            width: 1%;
+        }
+    
+        20% {
+            top: var(--y);
+            right: var(--x);
+            rotate: 0deg;
+            width: 10%;
+        }
+    
+        50% {
+            opacity: 1;
+            top: 47%;
+            right: 40%;
+            rotate: 110deg;
+            width: 10%;
+            scale: 1;
+        }
         
+        70% {
+            scale: 1.5;
+            right: 34%;
+        }
+        71% {
+            scale: 1.5;
+            top: 47%;
+            right: 34%;
+            rotate: 110deg;
+        }
+    }
+    
+    @keyframes rightHand1 {
+        0% {
+            opacity: .1;
+            top: calc(var(--y) - 5%);
+            left: calc(var(--x) + 15%);
+            width: 1%;
+        }
+    
+        20% {
+            top: var(--y);
+            left: var(--x);
+            rotate: 0deg;
+            width: 10%;
+        }
+    
+        50% {
+            opacity: 1;
+            top: 47%;
+            left: 40%;
+            rotate: -110deg;
+            width: 10%;
+            scale: 1;
+        }
+    
+        70% {
+            scale: 1.5;
+            left: 34%;
+        }
+        71% {
+            scale: 1.5;
+            top: 47%;
+            left: 34%;
+            rotate: -110deg;
+        }
+    }
+            
 }
 
 @media screen and (max-width:1000px) and (max-height:1500px) {
@@ -801,7 +937,7 @@ button:hover {
         --y: 25%;
     }
 
-    .title1 {
+    #title {
         font-size: 4rem;
         letter-spacing: .2rem;
         word-spacing: 1.5rem;
@@ -835,7 +971,7 @@ button:hover {
         --y: 25%;
     }
 
-    .title1 {
+    #title {
         font-size: 4rem;
         letter-spacing: .2rem;
     }
@@ -864,13 +1000,13 @@ button:hover {
         --y:25%
     }
 
-    .title1 {
+    #title {
         font-size: 4rem;
         letter-spacing: .2rem;
     }
 
     #leftHand, #rightHand {
-        width: 10%;
+        width: 20%;
     }
 
     main {
@@ -893,6 +1029,78 @@ button:hover {
     #donate img {
         width: 100px;
     }
+
+    @keyframes leftHand1 {
+        0% {
+            opacity: .1;
+            top: calc(var(--y) - 5%);
+            right: calc(var(--x) + 15%);
+            width: 1%;
+        }
+    
+        20% {
+            top: var(--y);
+            right: var(--x);
+            rotate: 0deg;
+            width: 10%;
+        }
+    
+        50% {
+            opacity: 1;
+            top: 60%;
+            right: 40%;
+            rotate: 110deg;
+            width: 10%;
+            scale: 1;
+        }
+        
+        70% {
+            scale: 1.5;
+            right: 30%;
+        }
+        71% {
+            scale: 1.5;
+            top: 47%;
+            right: 30%;
+            rotate: 110deg;
+        }
+    }
+    
+    @keyframes rightHand1 {
+        0% {
+            opacity: .1;
+            top: calc(var(--y) - 5%);
+            left: calc(var(--x) + 15%);
+            width: 1%;
+        }
+    
+        20% {
+            top: var(--y);
+            left: var(--x);
+            rotate: 0deg;
+            width: 10%;
+        }
+    
+        50% {
+            opacity: 1;
+            top: 60%;
+            left: 40%;
+            rotate: -110deg;
+            width: 10%;
+            scale: 1;
+        }
+    
+        70% {
+            scale: 1.5;
+            left: 30%;
+        }
+        71% {
+            scale: 1.5;
+            top: 47%;
+            left: 30%;
+            rotate: -110deg;
+        }
+    }
 }
 
 @media screen and (max-width:1200px) and (max-height:500px) {
@@ -905,7 +1113,7 @@ button:hover {
         top: -25%;
     }
 
-    .title1 {
+    #title {
         font-size: 3rem;
         letter-spacing: .9rem;
     }
