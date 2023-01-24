@@ -803,7 +803,11 @@ button:hover {
 
     main {
         height: 60%;
-    }    
+    }
+    
+    #main h1 {
+        font-size: 3.6rem;
+    }
 
     .question {
         font-size: 2.5rem;
@@ -814,7 +818,7 @@ button:hover {
     }
 
     #answersDiv button {
-        font-size: 1.5rem;
+        font-size: 2rem;
     }
 
     #img {
