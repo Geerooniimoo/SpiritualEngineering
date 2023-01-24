@@ -23,6 +23,8 @@ body {
     right: 0;
     color: #575b6d;
     letter-spacing: 2rem;
+    filter: drop-shadow(2px 2px 5px black);
+
 }
 
 .warning {
@@ -379,6 +381,10 @@ main {
     overflow: scroll;
 }
 
+#main h1 {
+    filter: drop-shadow(2px 2px 5px black);
+}
+
 @keyframes main {
     0% {
         opacity: 0;
@@ -636,8 +642,18 @@ button:hover {
         left: 0;
     }
 
+    #title {
+        font-size: 4rem;
+        letter-spacing: .8rem;
+        word-spacing: 1rem;
+    }
+
     main {
         height: 55vh;
+    }
+
+    #main h1 {
+        font-size: 2rem;
     }
 
     .question {
@@ -650,7 +666,7 @@ button:hover {
     }
     
     #answersDiv button {
-        font-size: 1.2rem;
+        font-size: 1.5rem;
     }
 
     #donate {
@@ -693,12 +709,16 @@ button:hover {
     }
     
     #leftHand, #rightHand {
-        width: 25%;
+        width: 15%;
     }
 
     main {
-        height: 40vh;
-    }    
+        height: 50vh;
+    }   
+    
+    #main h1 {
+        font-size: 1.9rem;
+    }
 
     .question {
         font-size: 4rem;
@@ -709,7 +729,7 @@ button:hover {
     }
 
     #answersDiv button {
-        font-size: 2.5rem;
+        font-size: 1.5rem;
     }
 
     #img {
@@ -719,8 +739,12 @@ button:hover {
     }
 
     #donate {
-        bottom: 0;
-        right: 0;
+        bottom: 30px;
+        right: 30px;
+    }
+
+    #donate img {
+        width: 230px;
     }
 
     @keyframes leftHand1 {
@@ -740,7 +764,7 @@ button:hover {
     
         50% {
             opacity: 1;
-            top: 65%;
+            top: 55%;
             right: 40%;
             rotate: 110deg;
             width: 10%;
@@ -749,7 +773,7 @@ button:hover {
         
         71% {
             scale: 1.5;
-            top: 65%;
+            top: 55%;
             right: 25%;
             rotate: 110deg;
         }
@@ -772,7 +796,7 @@ button:hover {
     
         50% {
             opacity: 1;
-            top: 65%;
+            top: 55%;
             left: 40%;
             rotate: -110deg;
             width: 10%;
@@ -781,7 +805,7 @@ button:hover {
     
         71% {
             scale: 1.5;
-            top: 65%;
+            top: 55%;
             left: 25%;
             rotate: -110deg;
         }
@@ -794,7 +818,13 @@ button:hover {
 
     :root {
         --x: 10%;
-        --y: 30%;
+        --y: 20%;
+    }
+
+    #title {
+        font-size: 3.8rem;
+        letter-spacing: .5rem;
+        word-spacing: 1rem;
     }
     
     #leftHand, #rightHand {
@@ -806,7 +836,7 @@ button:hover {
     }
     
     #main h1 {
-        font-size: 3.6rem;
+        font-size: 2rem;
     }
 
     .question {
@@ -814,11 +844,11 @@ button:hover {
     }
 
     #answersDiv {
-        width: 70%;
+        width: 60%;
     }
 
     #answersDiv button {
-        font-size: 2rem;
+        font-size: 1.5rem;
     }
 
     #img {
@@ -828,12 +858,138 @@ button:hover {
     }
 
     #donate {
-        bottom: 0;
+        bottom: 30px;
         right: 30px;
     }
 
     #donate img {
-        width: 120px;
+        width: 150px;
+    }
+
+    @keyframes leftHand1 {
+        0% {
+            opacity: .1;
+            top: calc(var(--y) - 5%);
+            right: calc(var(--x) + 15%);
+            width: 1%;
+        }
+    
+        20% {
+            top: var(--y);
+            right: var(--x);
+            rotate: 0deg;
+            width: 10%;
+        }
+    
+        50% {
+            opacity: 1;
+            top: 47%;
+            right: 40%;
+            rotate: 110deg;
+            width: 10%;
+            scale: 1;
+        }
+        
+        70% {
+            scale: 1.5;
+            right: 34%;
+        }
+        71% {
+            scale: 1.5;
+            top: 47%;
+            right: 34%;
+            rotate: 110deg;
+        }
+    }
+    
+    @keyframes rightHand1 {
+        0% {
+            opacity: .1;
+            top: calc(var(--y) - 5%);
+            left: calc(var(--x) + 15%);
+            width: 1%;
+        }
+    
+        20% {
+            top: var(--y);
+            left: var(--x);
+            rotate: 0deg;
+            width: 10%;
+        }
+    
+        50% {
+            opacity: 1;
+            top: 47%;
+            left: 40%;
+            rotate: -110deg;
+            width: 10%;
+            scale: 1;
+        }
+    
+        70% {
+            scale: 1.5;
+            left: 34%;
+        }
+        71% {
+            scale: 1.5;
+            top: 47%;
+            left: 34%;
+            rotate: -110deg;
+        }
+    }
+            
+}
+
+@media screen and (max-width:1100px) and (max-height:1900px) and (min-height:1500px) {
+
+    :root {
+        --x: 10%;
+        --y: 20%;
+    }
+
+    #title {
+        font-size: 3.8rem;
+        letter-spacing: .5rem;
+        word-spacing: 1rem;
+    }
+    
+    #leftHand, #rightHand {
+        width: 15%;
+    }
+
+    main {
+        height: 60%;
+    }
+    
+    #main h1 {
+        font-size: 3.5rem;
+    }
+
+    .question {
+        font-size: 2.5rem;
+    }
+
+    #answersDiv {
+        width: 100%;
+    }
+
+    #answersDiv button {
+        font-size: 2.5rem;
+    }
+
+    #img {
+        width: 150vw;
+        height: 100vh;
+        left: calc(50% - 75vw);
+    }
+
+    #donate {
+        bottom: 30px;
+        right: 30px;
+    }
+
+    #donate img {
+        width: 150px;
     }
 
     @keyframes leftHand1 {
@@ -925,12 +1081,16 @@ button:hover {
         height: 60vh;
     }    
 
+    #main h1 {
+        font-size: 1.9rem;
+    }
+
     .question {
         font-size: 4rem;
     }
 
     #answersDiv button {
-        font-size: 2.5rem;
+        font-size: 1.5rem;
     }
 }
 
@@ -1010,11 +1170,16 @@ button:hover {
     }
 
     #leftHand, #rightHand {
-        width: 20%;
+        width: 10%;
     }
 
     main {
         height: 60vh;
+    }
+
+    #main h1 {
+        font-size: 2rem;
+        letter-spacing: .1rem;
     }
 
     .question {
@@ -1023,11 +1188,11 @@ button:hover {
     }
 
     #answersDiv {
-        width: 65%;
+        width: 80%;
     }   
 
     #answersDiv button {
-        font-size: 1rem;
+        font-size: 1.2rem;
     }
 
     #donate img {
@@ -1120,6 +1285,10 @@ button:hover {
     #title {
         font-size: 3rem;
         letter-spacing: .9rem;
+    }
+
+    #leftHand, #rightHand {
+        width: 7%;
     }
 
     main {
