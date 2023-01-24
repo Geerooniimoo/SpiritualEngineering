@@ -87,7 +87,7 @@ const endGame = () => {
         setTimeout(() => {
             main.innerHTML = '';
             main.style.animation = 'main 4s';
-            main.innerHTML = `<h1 id="reflect" class="font-effect-fire-animation">Time to reflect before<br> next game<br><br><span id="remain">23:59</span></h1>`;
+            main.innerHTML = `<h1 id="reflect" class="font-effect-fire-animation">REFLECT<br><span id="remain">23:59</span></h1>`;
         }, 10000)
     } else {
         localStorage.removeItem('se');
@@ -147,7 +147,7 @@ const startGame = () => {
             let rH = (oneDay-lastVisit)/3600000;
             main.innerHTML = '';
             main.style.animation = 'main 4s';
-            main.innerHTML = `<h1 id="reflect" class="font-effect-fire-animation">Time to reflect before<br> next game<br><br><span id="remain">${Math.floor(rH)}:${Math.floor(rH%1*60)}</span></h1>`;
+            main.innerHTML = `<h1 id="reflect" class="font-effect-fire-animation">REFLECT<br><span id="remain">${Math.floor(rH)}:${Math.floor(rH%1*60)}</span></h1>`;
             return;
         }
     }
